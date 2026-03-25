@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dhruv Chavan — Data Science Resume</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 10pt;
+    color: #000;
+    background: #fff;
+    width: 8.5in;
+    margin: 0 auto;
+    padding: 0.5in 0.65in;
+    line-height: 1.32;
+  }
+
+  /* ── Header ── */
+  .hdr-name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18pt;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+  .hdr-contact {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 9.5pt;
+    margin-top: 3px;
+  }
+  .hdr-contact a { color: #1155cc; text-decoration: none; }
+  .pipe { color: #555; margin: 0 4px; }
+
+  /* ── Section ── */
+  .section { margin-top: 9px; }
+  .section-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid #000;
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+  }
+
+  /* ── Education ── */
+  .ed-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .ed-school {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 10.5pt;
+  }
+  .ed-right {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .ed-degree { font-size: 10pt; }
+
+  /* ── Skills ── */
+  .skills-list { list-style: none; padding: 0; }
+  .skills-list li { font-size: 10pt; margin-bottom: 1px; }
+  .skills-list li::before { content: "\25CF  "; font-size: 7pt; vertical-align: middle; }
+  .sk-cat { font-family: Arial, Helvetica, sans-serif; font-weight: 700; }
+
+  /* ── Entries ── */
+  .entry { margin-bottom: 6px; }
+  .entry-row1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .entry-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 10pt;
+  }
+  .entry-stack { font-family: Arial, Helvetica, sans-serif; font-weight: 400; }
+  .entry-date {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .entry-org-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10pt;
+    margin-bottom: 2px;
+  }
+
+  ul.bullets { list-style: none; padding: 0; margin-top: 1px; }
+  ul.bullets li {
+    font-size: 10pt;
+    padding-left: 13px;
+    position: relative;
+    margin-bottom: 1px;
+  }
+  ul.bullets li::before {
+    content: "\25CF";
+    position: absolute;
+    left: 0;
+    font-size: 6pt;
+    top: 3px;
+  }
+
+  @page { size: letter; margin: 0; }
+  @media print {
+    body { padding: 0.5in 0.65in; width: 100%; }
+    a { color: #1155cc !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hdr-name">Dhruv Chavan</div>
+<div class="hdr-contact">
+  Phone Number: (614) 705-9999
+  <span class="pipe">|</span>
+  Email: <a href="mailto:dhruvchavan59@gmail.com">dhruvchavan59@gmail.com</a>
+  <span class="pipe">|</span>
+  <a href="https://github.com/dchavan2192" target="_blank">GitHub Portfolio</a>
+  <span class="pipe">|</span>
+  <a href="https://linkedin.com/in/dhruv-chavan-a11688288" target="_blank">LinkedIn</a>
+</div>
+
+<!-- Education -->
+<div class="section">
+  <div class="section-title">Education</div>
+  <div class="ed-row">
+    <div class="ed-school">The Ohio State University</div>
+    <div class="ed-right">Expected Graduation: May 2027</div>
+  </div>
+  <div class="ed-row">
+    <div class="ed-degree">B.S. in Data Analytics &mdash; Honors and Scholars Student</div>
+    <div class="ed-right">GPA: 3.7/4.0</div>
+  </div>
+</div>
+
+<!-- Skills -->
+<div class="section">
+  <div class="section-title">Skills</div>
+  <ul class="skills-list">
+    <li><span class="sk-cat">Languages:</span> Python, SQL, R, Java, HTML, MATLAB</li>
+    <li><span class="sk-cat">Tools:</span> GitHub, AWS, Tableau, Power BI, PyCharm, Jupyter, Microsoft Office</li>
+    <li><span class="sk-cat">Frameworks / Libraries:</span> PyTorch, TensorFlow, Scikit-Learn, Pandas, NumPy, SciPy, Matplotlib, Seaborn</li>
+    <li><span class="sk-cat">Databases:</span> PostgreSQL, MySQL</li>
+  </ul>
+</div>
+
+<!-- Experience -->
+<div class="section">
+  <div class="section-title">Experience</div>
+
+  <div class="entry">
+    <div class="entry-row1">
+      <span class="entry-title">Data and AI Engineering Intern <span class="entry-stack">| Python, PostgreSQL, PyTorch, LLMs, MCP</span></span>
+      <span class="entry-date">September 2025 &ndash; December 2025</span>
+    </div>
+    <div class="entry-org-row">
+      <span>BMW Financial Services</span>
+      <span>Columbus, OH</span>
+    </div>
+    <ul class="bullets">
+      <li>Created machine learning and Gen AI solutions, enabling data scientists to cut model training cycles by 30%</li>
+      <li>Built MCP tools for internal LLM use cases and database design, improving data retrieval efficiency by 40%</li>
+      <li>Showcased progress to stakeholders through presentations and demonstrations of AI-driven solutions</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-row1">
+      <span class="entry-title">Undergraduate Computational Biology Researcher <span class="entry-stack">| Python, R, Pandas, DBSCAN</span></span>
+      <span class="entry-date">February 2024 &ndash; June 2025</span>
+    </div>
+    <div class="entry-org-row">
+      <span>Nationwide Children's Hospital &mdash; Computational Modeling in Immune Response</span>
+      <span>Columbus, OH</span>
+    </div>
+    <ul class="bullets">
+      <li>Analyzed 1.2M+ spatial data points from 30+ brain tumors, revealing cell clustering patterns linked to ICI treatment response</li>
+      <li>Designed fencing algorithms to quantify immune cell proximity to cancer cells across tumor subtypes</li>
+      <li>Submitted paper to iScience (Cell Press) after developing advanced visualizations of tumor microenvironment structure</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-row1">
+      <span class="entry-title">Undergraduate Student Researcher <span class="entry-stack">| Python, Pandas, Power BI, MySQL, Matplotlib</span></span>
+      <span class="entry-date">July 2024 &ndash; Present</span>
+    </div>
+    <div class="entry-org-row">
+      <span>OSU Wexner Medical Center &mdash; Assistive Technology Data Analysis</span>
+      <span>Columbus, OH</span>
+    </div>
+    <ul class="bullets">
+      <li>Analyzed 4,000+ patient data points; findings presented to clinicians led to a 25% improvement in patient outcomes</li>
+      <li>Applied hypothesis testing to identify demographic correlations and create visual clinical representations</li>
+      <li>Published as second author at the international RESNA conference and attended Rehabweek 2025</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-row1">
+      <span class="entry-title">Undergraduate Aerospace Researcher <span class="entry-stack">| Python, MATLAB, TensorFlow, Kalman Filter</span></span>
+      <span class="entry-date">January 2025 &ndash; Present</span>
+    </div>
+    <div class="entry-org-row">
+      <span>Department of Mechanical and Aerospace Engineering at OSU</span>
+      <span>Columbus, OH</span>
+    </div>
+    <ul class="bullets">
+      <li>Building lightweight CNN models for on-drone wildfire classification using aerial imagery</li>
+      <li>Implementing a Kalman Filter that reduces orientation error by 85%, improving flight path stability in test runs</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- Leadership -->
+<div class="section">
+  <div class="section-title">Leadership</div>
+  <div class="entry">
+    <div class="entry-row1">
+      <span class="entry-title">Mount Scholars Leadership Society</span>
+      <span class="entry-date">August 2023 &ndash; Present</span>
+    </div>
+    <ul class="bullets">
+      <li>Led Team Security initiatives and developed leadership through weekly training, mentorship, and retreats</li>
+      <li>Completed 75+ hours mentoring athletes with Down syndrome through weekly tennis sessions and events</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Projects -->
+<div class="section">
+  <div class="section-title">Projects</div>
+
+  <div class="entry">
+    <div class="entry-row1">
+      <span class="entry-title">Animal Image Classification ML Model <span class="entry-stack">| PyTorch, Scikit-Learn, TensorFlow, Pandas, Python</span></span>
+      <span class="entry-date">June 2024</span>
+    </div>
+    <ul class="bullets">
+      <li>Designed an object-oriented CNN using TensorFlow and Keras to classify animal images with 98.2% accuracy</li>
+      <li>Trained on a balanced dataset of five animal classes, applying data augmentation to improve robustness</li>
+      <li>Optimized performance with multiple convolutional and pooling layers to enhance feature extraction and accuracy</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-row1">
+      <span class="entry-title">Lymphedema Scanner App <span class="entry-stack">| iOS Dev, SwiftUI, ARKit, SceneKit, Xcode, Firebase</span></span>
+      <span class="entry-date">February 2024</span>
+    </div>
+    <ul class="bullets">
+      <li>Won 1st place in OSU Appathon with a 95%-accurate lymphedema detection iOS app</li>
+      <li>Implemented ARKit and SceneKit in Xcode with SwiftUI, using vector grids for facial volume capture</li>
+      <li>Integrated Google Firebase to manage user authentication and securely store authentication data</li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhruv Chavan — Data Scientist & ML Engineer</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Dhruv Chavan — Data Scientist & ML Engineer at Ohio State. Building ML systems from tumor microenvironments to wildfire drones. Published researcher. BMW AI intern." />
+  <meta name="keywords" content="Dhruv Chavan, Data Scientist, ML Engineer, Ohio State, PyTorch, Computer Vision, Edge AI, Research" />
+  <meta name="author" content="Dhruv Chavan" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph (LinkedIn, Slack, iMessage, etc.) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dhruv Chavan — Data Scientist & ML Engineer" />
+  <meta property="og:description" content="Building ML systems from tumor microenvironments to wildfire drones. Published in iScience. BMW AI intern. OSU Data Analytics & Scholars." />
+  <meta property="og:image" content="dhruv.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://dhruvchavan.dev" />
+  <meta property="og:site_name" content="Dhruv Chavan Portfolio" />
+
+  <!-- Browser / mobile chrome -->
+  <meta name="theme-color" content="#07090f" />
+  <meta name="color-scheme" content="dark" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══ LOADER ═══ -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-brand">
+        <span class="loader-hex">⬡</span>
+        <span class="loader-name">dhruv.chavan</span>
+      </div>
+      <div class="loader-terminal" id="loaderTerminal"></div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar" id="loaderBar"></div>
+      </div>
+      <p class="loader-pct" id="loaderPct">0%</p>
+    </div>
+  </div>
+
+  <!-- Scroll progress -->
+  <div id="scroll-bar"></div>
+  <!-- Spotlight -->
+  <div id="spotlight"></div>
+  <!-- Custom cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#hero">
+        <span class="brand-hex">⬡</span>
+        <span>dhruv.chavan</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">about</a></li>
+        <li><a href="#experience">work</a></li>
+        <li><a href="#projects">projects</a></li>
+        <li><a href="#research">research</a></li>
+        <li><a href="#contact" class="nav-cta">hire me</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <!-- Live status ticker -->
+    <div class="ticker-wrap">
+      <div class="ticker-track">
+        <span class="ti"><span class="ti-key">BUILDING</span> On-drone wildfire classification ML · OSU Aerospace</span>
+        <span class="ti-sep">⬡</span>
+        <span class="ti"><span class="ti-key">PUBLISHED</span> iScience · 1.2M+ spatial data points · Nationwide Children's</span>
+        <span class="ti-sep">⬡</span>
+        <span class="ti"><span class="ti-key">SUBMITTED</span> AIAA 2025 · RESNA 2026</span>
+        <span class="ti-sep">⬡</span>
+        <span class="ti"><span class="ti-key">EXPERIENCE</span> BMW Financial Services · GenAI &amp; MCP Engineering · 2025</span>
+        <span class="ti-sep">⬡</span>
+        <span class="ti"><span class="ti-key dot-green">SEEKING</span> ML Engineer · Research Scientist · Data Scientist · Summer/Fall 2026</span>
+        <span class="ti-sep">⬡</span>
+        <!-- duplicate for seamless loop -->
+        <span class="ti"><span class="ti-key">BUILDING</span> On-drone wildfire classification ML · OSU Aerospace</span>
+        <span class="ti-sep">⬡</span>
+        <span class="ti"><span class="ti-key">PUBLISHED</span> iScience · 1.2M+ spatial data points · Nationwide Children's</span>
+        <span class="ti-sep">⬡</span>
+        <span class="ti"><span class="ti-key">SUBMITTED</span> AIAA 2025 · RESNA 2026</span>
+        <span class="ti-sep">⬡</span>
+        <span class="ti"><span class="ti-key">EXPERIENCE</span> BMW Financial Services · GenAI &amp; MCP Engineering · 2025</span>
+        <span class="ti-sep">⬡</span>
+        <span class="ti"><span class="ti-key dot-green">SEEKING</span> ML Engineer · Research Scientist · Data Scientist · Summer/Fall 2026</span>
+        <span class="ti-sep">⬡</span>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about" class="mm-link">about</a>
+      <a href="#experience" class="mm-link">work</a>
+      <a href="#projects" class="mm-link">projects</a>
+      <a href="#research" class="mm-link">research</a>
+      <a href="#contact" class="mm-link">contact</a>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section id="hero">
+    <canvas id="canvas"></canvas>
+    <div class="hero-grid-overlay"></div>
+    <div class="hero-inner">
+      <div class="hero-split">
+        <!-- Left: text -->
+        <div class="hero-left">
+          <div class="hero-status reveal-hero">
+            <span class="status-dot"></span>
+            <span class="status-mono">model_status</span>
+            <span class="status-sep">:</span>
+            <span class="status-val">available_for_deployment</span>
+          </div>
+          <h1 class="hero-name reveal-hero">
+            <span class="name-first">Dhruv</span>
+            <span class="name-last">Chavan<span class="name-dot">.</span></span>
+          </h1>
+          <div class="hero-typewriter reveal-hero">
+            <span class="tw-prefix">class </span><span id="tw-text"></span><span class="tw-cursor">|</span>
+          </div>
+          <p class="hero-desc reveal-hero">
+            Data Analytics @ <strong>Ohio State</strong> · Building ML systems that go from
+            lab notebooks to real-world impact — from tumor microenvironments to wildfire drones.
+          </p>
+          <div class="hero-metrics reveal-hero">
+            <div class="hm-item">
+              <div class="hm-val"><span class="counter" data-target="4000">0</span><span>+</span></div>
+              <div class="hm-key">data_points</div>
+            </div>
+            <div class="hm-div"></div>
+            <div class="hm-item">
+              <div class="hm-val"><span class="counter" data-target="98">0</span><span>.2%</span></div>
+              <div class="hm-key">cnn_accuracy</div>
+            </div>
+            <div class="hm-div"></div>
+            <div class="hm-item">
+              <div class="hm-val"><span class="counter" data-target="4">0</span></div>
+              <div class="hm-key">research_labs</div>
+            </div>
+            <div class="hm-div"></div>
+            <div class="hm-item">
+              <div class="hm-val"><span class="counter" data-target="1">0</span><span>st</span></div>
+              <div class="hm-key">appathon_rank</div>
+            </div>
+          </div>
+          <div class="hero-actions reveal-hero">
+            <a href="#experience" class="btn-fill">Explore Work</a>
+            <a href="mailto:dhruvchavan59@gmail.com" class="btn-outline">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Get In Touch
+            </a>
+            <a href="resume.pdf" download class="btn-resume">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Resume
+            </a>
+          </div>
+        </div>
+        <!-- Right: photo -->
+        <div class="hero-photo reveal-hero">
+          <div class="photo-frame">
+            <img src="dhruv.jpg" alt="Dhruv Chavan" />
+            <div class="photo-ring photo-ring-1"></div>
+            <div class="photo-ring photo-ring-2"></div>
+            <div class="photo-badge">
+              <span class="pb-dot"></span>
+              <span>Open to work</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="hs-line"></div>
+      <span class="hs-label">scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-layout">
+
+        <div class="about-text">
+          <p class="eyebrow reveal">// 001 · about</p>
+          <h2 class="section-h reveal">Building at the<br/>intersection of<br/><em>data & impact.</em></h2>
+          <p class="about-p reveal">I'm a <strong>Data Analytics &amp; Scholars student</strong> at The Ohio State University, applying machine learning and statistical modeling to problems that matter. From detecting brain cancer patterns in 1.2M+ spatial data points to building ML-powered wildfire drones, I turn complex data into real decisions. My patient outcome research has been presented to clinicians at an international conference, directly improving care for hundreds of assistive technology users.</p>
+          <p class="about-p reveal">Interned at <strong>BMW Financial Services</strong>, published at an international conference, won a medical hackathon, and conducted research across <strong>4 institutions</strong> — all while holding a 3.7 GPA.</p>
+          <div class="about-links reveal">
+            <a href="https://github.com/dchavan2192" target="_blank" class="link-chip">
+              <svg viewBox="0 0 16 16" fill="currentColor" width="13" height="13"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+              GitHub
+            </a>
+            <a href="https://linkedin.com/in/dhruvchavan" target="_blank" class="link-chip">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a href="mailto:dhruvchavan59@gmail.com" class="link-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Email
+            </a>
+          </div>
+        </div>
+
+        <!-- ML Model Card - the unique element -->
+        <div class="model-card reveal">
+          <div class="mc-glow"></div>
+          <div class="mc-header">
+            <div class="mc-avatar">DC</div>
+            <div class="mc-info">
+              <div class="mc-name">Dhruv Chavan</div>
+              <div class="mc-handle">dchavan2192</div>
+            </div>
+            <div class="mc-version">v2025</div>
+          </div>
+          <div class="mc-tagline">Data Scientist · ML Engineer · Researcher</div>
+          <div class="mc-rule"></div>
+          <div class="mc-rows">
+            <div class="mc-row">
+              <span class="mc-key">architecture</span>
+              <span class="mc-val">Data Analytics + Honors</span>
+            </div>
+            <div class="mc-row">
+              <span class="mc-key">institution</span>
+              <span class="mc-val">Ohio State University</span>
+            </div>
+            <div class="mc-row">
+              <span class="mc-key">gpa</span>
+              <span class="mc-val green">3.7 / 4.0</span>
+            </div>
+            <div class="mc-row">
+              <span class="mc-key">graduation</span>
+              <span class="mc-val">May 2027</span>
+            </div>
+            <div class="mc-row">
+              <span class="mc-key">top_accuracy</span>
+              <span class="mc-val green">98.2% CNN</span>
+            </div>
+            <div class="mc-row">
+              <span class="mc-key">publications</span>
+              <span class="mc-val">RESNA + iScience + AIAA</span>
+            </div>
+            <div class="mc-row">
+              <span class="mc-key">status</span>
+              <span class="mc-val blue">● available</span>
+            </div>
+          </div>
+          <div class="mc-rule"></div>
+          <div class="mc-chips-label">frameworks</div>
+          <div class="mc-chips">
+            <span>PyTorch</span><span>TensorFlow</span><span>Pandas</span>
+            <span>NumPy</span><span>SciKit-Learn</span><span>MATLAB</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DATA SHOWCASE ═══ -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="eyebrow reveal">// data · visualization</p>
+      <h2 class="section-h reveal">The numbers speak.</h2>
+      <div class="showcase-layout">
+
+        <!-- Animated training curve -->
+        <div class="chart-card reveal">
+          <div class="chart-topbar">
+            <div>
+              <p class="chart-title">Model Training Curve</p>
+              <p class="chart-sub">CNN · Animal Classifier · 40 epochs</p>
+            </div>
+            <div class="chart-legend">
+              <span class="cl-item"><span class="cl-dot blue"></span>Training</span>
+              <span class="cl-item"><span class="cl-dot green"></span>Validation</span>
+            </div>
+          </div>
+          <svg id="trainChart" viewBox="0 0 500 200" preserveAspectRatio="xMidYMid meet" width="100%"></svg>
+        </div>
+
+        <!-- IMU Test Stand pitch comparison -->
+        <div class="chart-card chart-card-wide reveal">
+          <div class="chart-topbar">
+            <div>
+              <p class="chart-title">IMU Test Stand · Pitch Tracking</p>
+              <p class="chart-sub">Custom BNO055 IMU vs Encoder ground truth · ±42° swing</p>
+            </div>
+            <div class="chart-legend">
+              <span class="cl-item"><span class="cl-dot blue"></span>IMU (Lord Microstrain)</span>
+              <span class="cl-item"><span class="cl-dot green"></span>Encoder (ground truth)</span>
+            </div>
+          </div>
+          <svg id="pitchChart" viewBox="0 0 600 200" preserveAspectRatio="xMidYMid meet" width="100%"></svg>
+        </div>
+
+        <!-- Python terminal -->
+        <div class="terminal-card reveal">
+          <div class="term-bar">
+            <span class="tb r"></span>
+            <span class="tb y"></span>
+            <span class="tb g"></span>
+            <span class="term-fname">kalman_filter.py</span>
+          </div>
+          <div class="term-body">
+<pre class="term-code"><code><span class="k">import</span> numpy <span class="k">as</span> <span class="v">np</span>
+
+<span class="k">class</span> <span class="cn">KalmanFilter</span>:
+    <span class="k">def</span> <span class="fn">__init__</span>(<span class="v">self</span>, dt=<span class="n">0.01</span>):
+        <span class="v">self</span>.Q = np.eye(<span class="n">3</span>) * <span class="n">1e-3</span>
+        <span class="v">self</span>.R = np.eye(<span class="n">3</span>) * <span class="n">0.03</span>
+        <span class="v">self</span>.P = np.eye(<span class="n">3</span>)
+        <span class="v">self</span>.x = np.zeros(<span class="n">3</span>)
+        <span class="v">self</span>.dt = dt
+
+    <span class="k">def</span> <span class="fn">step</span>(<span class="v">self</span>, gyro, accel):
+        <span class="v">self</span>.x += gyro * <span class="v">self</span>.dt
+        <span class="v">self</span>.P  = <span class="v">self</span>.P + <span class="v">self</span>.Q
+        K = <span class="v">self</span>.P @ np.linalg.inv(
+                <span class="v">self</span>.P + <span class="v">self</span>.R)
+        <span class="v">self</span>.x += K @ (accel - <span class="v">self</span>.x)
+        <span class="v">self</span>.P  = (np.eye(<span class="n">3</span>) - K) @ <span class="v">self</span>.P
+        <span class="k">return</span> <span class="v">self</span>.x
+
+imu = <span class="cn">KalmanFilter</span>(dt=<span class="n">0.01</span>)</code></pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EXPERIENCE ═══ -->
+  <section id="experience" class="section section-alt">
+    <div class="container">
+      <p class="eyebrow reveal">// 002 · experience</p>
+      <h2 class="section-h reveal">Where I've shipped.</h2>
+      <div class="exp-layout reveal">
+        <div class="exp-tabs" role="tablist">
+          <button class="exp-tab active" data-tab="0" role="tab">BMW Financial Services</button>
+          <button class="exp-tab" data-tab="1" role="tab">OSU Aerospace</button>
+          <button class="exp-tab" data-tab="2" role="tab">OSU Wexner Medical</button>
+          <button class="exp-tab" data-tab="3" role="tab">Nationwide Children's</button>
+        </div>
+        <div class="exp-content">
+          <div class="exp-panel active" data-panel="0">
+            <div class="ep-top">
+              <div>
+                <h3 class="ep-title">Data and AI Engineering Intern</h3>
+                <p class="ep-org">@ BMW Financial Services</p>
+              </div>
+              <span class="ep-date">Sep – Dec 2025</span>
+            </div>
+            <div class="ep-stack">
+              <span>Python</span><span>PyTorch</span><span>PostgreSQL</span><span>LLMs</span><span>MCP</span>
+            </div>
+            <ul class="ep-list">
+              <li>Created ML and Gen AI solutions, cutting model training cycles by <mark>30%</mark></li>
+              <li>Built MCP tools for internal LLM use cases, improving data retrieval efficiency by <mark>40%</mark></li>
+              <li>Showcased AI-driven solutions through stakeholder presentations and live demos</li>
+            </ul>
+            <div class="ep-code">
+              <div class="ep-code-bar"><span class="cc-dot r"></span><span class="cc-dot y"></span><span class="cc-dot g"></span><span class="cc-fname">mcp_server.py</span></div>
+<pre class="ep-code-pre"><code><span class="v">@server</span>.call_tool()
+<span class="k">async def</span> <span class="fn">call_tool</span>(name: <span class="t">str</span>, args: <span class="t">dict</span>):
+    <span class="k">if</span> name == <span class="s">"query_model_metrics"</span>:
+        sql = <span class="s">"""SELECT run_id, metric, value
+               FROM model_runs
+               WHERE ts &gt;= NOW() - INTERVAL '7 days'
+               ORDER BY ts DESC LIMIT 100"""</span>
+        rows = <span class="k">await</span> <span class="fn">db_fetch</span>(sql)
+        <span class="k">return</span> [<span class="cn">TextContent</span>(type=<span class="s">"text"</span>,
+                  text=<span class="fn">json_table</span>(rows))]
+    <span class="k">raise</span> <span class="cn">ValueError</span>(<span class="s">f"Unknown tool: </span><span class="v">{name}</span><span class="s">"</span>)</code></pre>
+            </div>
+          </div>
+          <div class="exp-panel" data-panel="1">
+            <div class="ep-top">
+              <div>
+                <h3 class="ep-title">Undergraduate Aerospace Researcher</h3>
+                <p class="ep-org">@ OSU Dept. of Mechanical & Aerospace Engineering</p>
+              </div>
+              <span class="ep-date">Jan 2025 – Present</span>
+            </div>
+            <div class="ep-stack">
+              <span>Python</span><span>MATLAB</span><span>Kalman Filter</span><span>Arduino</span><span>ESP32</span>
+            </div>
+            <ul class="ep-list">
+              <li>Building lightweight ML models for on-drone wildfire classification from aerial imagery</li>
+              <li>Developing custom IMU with Arduino, BNO055, and ESP32 for indoor drone navigation</li>
+              <li>Kalman Filter implementation reduces orientation error by <mark>85%</mark>, improving flight stability</li>
+            </ul>
+            <div class="ep-code">
+              <div class="ep-code-bar"><span class="cc-dot r"></span><span class="cc-dot y"></span><span class="cc-dot g"></span><span class="cc-fname">liveKalman.py</span></div>
+<pre class="ep-code-pre"><code><span class="k">def</span> <span class="fn">euler2quat</span>(roll, pitch, yaw):
+    cr, sr = np.<span class="fn">cos</span>(roll/<span class="n">2</span>), np.<span class="fn">sin</span>(roll/<span class="n">2</span>)
+    cp, sp = np.<span class="fn">cos</span>(pitch/<span class="n">2</span>), np.<span class="fn">sin</span>(pitch/<span class="n">2</span>)
+    cy, sy = np.<span class="fn">cos</span>(yaw/<span class="n">2</span>), np.<span class="fn">sin</span>(yaw/<span class="n">2</span>)
+    <span class="k">return</span> np.<span class="fn">array</span>([
+        cr*cp*cy + sr*sp*sy,
+        sr*cp*cy - cr*sp*sy,
+        cr*sp*cy + sr*cp*sy,
+        cr*cp*sy - sr*sp*cy
+    ])
+
+<span class="k">def</span> <span class="fn">predict</span>(self):
+    self.x = self.F @ self.x
+    self.P = self.F @ self.P @ self.F.T + self.Q</code></pre>
+            </div>
+          </div>
+          <div class="exp-panel" data-panel="2">
+            <div class="ep-top">
+              <div>
+                <h3 class="ep-title">Undergraduate Student Researcher</h3>
+                <p class="ep-org">@ OSU Wexner Medical Center — Assistive Technology</p>
+              </div>
+              <span class="ep-date">Jul 2024 – Present</span>
+            </div>
+            <div class="ep-stack">
+              <span>Python</span><span>Pandas</span><span>Power BI</span><span>MySQL</span><span>Matplotlib</span>
+            </div>
+            <ul class="ep-list">
+              <li>Analyzed <mark>4,000+</mark> patient data points; findings led to <mark>25%</mark> improvement in clinical outcomes</li>
+              <li>Applied hypothesis testing to identify demographic correlations in assistive tech usage</li>
+              <li>Published as second author at RESNA; presented at <mark>2025 RehabWeek</mark> to 2,000+ attendees</li>
+            </ul>
+            <div class="ep-code">
+              <div class="ep-code-bar"><span class="cc-dot r"></span><span class="cc-dot y"></span><span class="cc-dot g"></span><span class="cc-fname">fundingSourceCode.py</span></div>
+<pre class="ep-code-pre"><code>groups = [df[df[<span class="s">"funding"</span>]==g][<span class="s">"outcome"</span>]
+          <span class="k">for</span> g <span class="k">in</span> df[<span class="s">"funding"</span>].<span class="fn">unique</span>()]
+F, p = stats.<span class="fn">f_oneway</span>(*groups)
+
+tukey = <span class="fn">pairwise_tukeyhsd</span>(
+    endog=df[<span class="s">"outcome"</span>],
+    groups=df[<span class="s">"funding"</span>],
+    alpha=<span class="n">0.05</span>
+)
+sig = tukey.summary().data[<span class="n">1</span>:]
+sig_pairs = [r <span class="k">for</span> r <span class="k">in</span> sig <span class="k">if</span> r[<span class="n">-1</span>]]</code></pre>
+            </div>
+          </div>
+          <div class="exp-panel" data-panel="3">
+            <div class="ep-top">
+              <div>
+                <h3 class="ep-title">Undergraduate Computational Biology Researcher</h3>
+                <p class="ep-org">@ Nationwide Children's Hospital — Immune Response Modeling</p>
+              </div>
+              <span class="ep-date">Feb 2024 – Jun 2025</span>
+            </div>
+            <div class="ep-stack">
+              <span>Python</span><span>R</span><span>Pandas</span><span>Statistical Modeling</span>
+            </div>
+            <ul class="ep-list">
+              <li>Analyzed <mark>1.2M+</mark> spatial data points from <mark>30+</mark> brain tumors for ICI response research</li>
+              <li>Designed fencing algorithms to cluster and analyze immune cell interactions with cancer cells</li>
+              <li>Published in <em>iScience</em> journal after multi-year analysis pipeline development</li>
+            </ul>
+            <div class="ep-code">
+              <div class="ep-code-bar"><span class="cc-dot r"></span><span class="cc-dot y"></span><span class="cc-dot g"></span><span class="cc-fname">NRvR.py</span></div>
+<pre class="ep-code-pre"><code><span class="k">def</span> <span class="fn">permutation_test</span>(obs, n_perm=<span class="n">10000</span>):
+    real_diff = <span class="fn">np.mean</span>(obs[<span class="s">"ICI_R"</span>]) - <span class="fn">np.mean</span>(obs[<span class="s">"ICI_NR"</span>])
+    pooled = np.<span class="fn">concatenate</span>([
+        obs[<span class="s">"ICI_R"</span>], obs[<span class="s">"ICI_NR"</span>]])
+    n = <span class="fn">len</span>(obs[<span class="s">"ICI_R"</span>])
+    null = np.<span class="fn">array</span>([
+        np.<span class="fn">mean</span>(s := np.random.<span class="fn">permutation</span>(pooled)[:n])
+        - np.<span class="fn">mean</span>(pooled[n:])
+        <span class="k">for</span> _ <span class="k">in</span> <span class="fn">range</span>(n_perm)])
+    <span class="k">return</span> np.<span class="fn">mean</span>(np.<span class="fn">abs</span>(null) >= <span class="fn">abs</span>(real_diff))</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SKILLS ═══ -->
+  <section id="skills" class="section">
+    <div class="container">
+      <p class="eyebrow reveal">// 003 · skills</p>
+      <h2 class="section-h reveal">Tech stack.</h2>
+      <div class="skills-layout">
+        <div class="radar-wrap reveal">
+          <svg id="radarChart" viewBox="0 0 320 320" width="320" height="320"></svg>
+        </div>
+        <div class="skill-chips-col reveal">
+          <div class="scc-group">
+            <p class="scc-label">ML &amp; AI</p>
+            <div class="scc-chips">
+              <span class="sc blue">PyTorch</span>
+              <span class="sc blue">TensorFlow</span>
+              <span class="sc blue">SciKit-Learn</span>
+              <span class="sc blue">CNNs</span>
+              <span class="sc blue">LLMs / MCP</span>
+              <span class="sc blue">Kalman Filter</span>
+            </div>
+          </div>
+          <div class="scc-group">
+            <p class="scc-label">Data &amp; Viz</p>
+            <div class="scc-chips">
+              <span class="sc green">Pandas</span>
+              <span class="sc green">NumPy</span>
+              <span class="sc green">Matplotlib</span>
+              <span class="sc green">Seaborn</span>
+              <span class="sc green">Power BI</span>
+              <span class="sc green">Tableau</span>
+            </div>
+          </div>
+          <div class="scc-group">
+            <p class="scc-label">Tools &amp; Cloud</p>
+            <div class="scc-chips">
+              <span class="sc amber">GitHub</span>
+              <span class="sc amber">AWS</span>
+              <span class="sc amber">PostgreSQL</span>
+              <span class="sc amber">MySQL</span>
+              <span class="sc amber">Firebase</span>
+              <span class="sc amber">Arduino</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROJECTS — BENTO GRID ═══ -->
+  <section id="projects" class="section section-alt">
+    <div class="container">
+      <p class="eyebrow reveal">// 004 · projects</p>
+      <h2 class="section-h reveal">Things I've built.</h2>
+      <div class="bento reveal">
+
+        <div class="bento-card bc-large">
+          <div class="bc-badge">🏆 1st Place · OSU Appathon</div>
+          <h3>Lymphedema Scanner</h3>
+          <p>iOS app using ARKit & SceneKit with vector-grid facial volume capture achieving <strong>95%</strong> accurate lymphedema detection. Won first place at OSU College of Medicine Appathon.</p>
+          <div class="bc-stack"><span>SwiftUI</span><span>ARKit</span><span>SceneKit</span><span>Firebase</span><span>Xcode</span></div>
+          <a href="https://github.com/dchavan2192" target="_blank" class="bc-link">View on GitHub →</a>
+          <div class="bc-metric-bg">95%</div>
+          <div class="card-code">
+            <div class="cc-bar"><span class="cc-dot r"></span><span class="cc-dot y"></span><span class="cc-dot g"></span><span class="cc-fname">ScanSession.swift</span></div>
+<pre class="cc-pre"><code><span class="k">func</span> <span class="fn">session</span>(<span class="v">_</span> s: <span class="t">ARSession</span>,
+         didUpdate anchors: [<span class="t">ARAnchor</span>]) {
+    <span class="k">guard let</span> face = anchors.first
+            <span class="k">as?</span> <span class="t">ARFaceAnchor</span> <span class="k">else</span> { <span class="k">return</span> }
+    <span class="k">let</span> grid = <span class="cn">VectorGrid</span>(face.geometry)
+    <span class="t">DispatchQueue</span>.main.async {
+        <span class="v">self</span>.volumeDelta = grid.delta()
+        <span class="v">self</span>.scanProgress = grid.progress()
+    }
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="bento-card bc-med blue-accent">
+          <div class="bc-eyebrow">GenAI · LLMs · MCP</div>
+          <div class="bc-big-num">40%↑</div>
+          <h3>GenAI & MCP Systems</h3>
+          <p>Built MCP tools for internal LLM inference pipelines at BMW. Improved data retrieval efficiency by <strong>40%</strong> and cut model training cycles by <strong>30%</strong>.</p>
+          <div class="bc-stack"><span>PyTorch</span><span>LLMs</span><span>MCP</span><span>PostgreSQL</span></div>
+          <a href="https://github.com/dchavan2192" target="_blank" class="bc-link">View →</a>
+          <div class="card-code">
+            <div class="cc-bar"><span class="cc-dot r"></span><span class="cc-dot y"></span><span class="cc-dot g"></span><span class="cc-fname">mcp_server.py</span></div>
+<pre class="cc-pre"><code><span class="v">@server</span>.call_tool()
+<span class="k">async def</span> <span class="fn">call_tool</span>(name: <span class="t">str</span>, args: <span class="t">dict</span>):
+    <span class="k">async with</span> pool.acquire() <span class="k">as</span> conn:
+        rows = <span class="k">await</span> conn.fetch(args[<span class="s">"sql"</span>])
+    <span class="k">return</span> [<span class="cn">TextContent</span>(
+        type=<span class="s">"text"</span>,
+        text=json.dumps(
+            [<span class="t">dict</span>(r) <span class="k">for</span> r <span class="k">in</span> rows])
+    )]</code></pre>
+          </div>
+        </div>
+
+        <div class="bento-card bc-med green-accent">
+          <div class="bc-img">
+            <img src="assets/drone-build.png" alt="Drone build in progress — carbon frame and ESC wiring" loading="lazy">
+          </div>
+          <div class="bc-eyebrow">Embedded ML · Drones</div>
+          <div class="bc-big-num">85%↓</div>
+          <h3>Wildfire Detection Drone</h3>
+          <p>Lightweight on-drone ML models for aerial wildfire classification. Custom IMU with Kalman Filter.</p>
+          <div class="bc-stack"><span>Python</span><span>MATLAB</span><span>Arduino</span><span>ESP32</span></div>
+          <a href="https://github.com/dchavan2192/Research-OSU-WildFire" target="_blank" class="bc-link">View →</a>
+          <div class="card-code">
+            <div class="cc-bar"><span class="cc-dot r"></span><span class="cc-dot y"></span><span class="cc-dot g"></span><span class="cc-fname">wildfire_cnn.py</span></div>
+<pre class="cc-pre"><code><span class="k">class</span> <span class="cn">WildfireCNN</span>(nn.Module):
+    <span class="k">def</span> <span class="fn">__init__</span>(<span class="v">self</span>):
+        <span class="k">super</span>().__init__()
+        <span class="v">self</span>.backbone = nn.Sequential(
+            nn.Conv2d(<span class="n">3</span>, <span class="n">16</span>, <span class="n">3</span>, padding=<span class="n">1</span>),
+            nn.ReLU(), nn.MaxPool2d(<span class="n">2</span>),
+            nn.Conv2d(<span class="n">16</span>, <span class="n">32</span>, <span class="n">3</span>, padding=<span class="n">1</span>),
+            nn.ReLU(), nn.AdaptiveAvgPool2d(<span class="n">4</span>),
+        )
+        <span class="v">self</span>.head = nn.Linear(<span class="n">512</span>, <span class="n">2</span>)
+
+    <span class="k">def</span> <span class="fn">forward</span>(<span class="v">self</span>, x):
+        <span class="k">return</span> <span class="v">self</span>.head(
+            <span class="v">self</span>.backbone(x).flatten(<span class="n">1</span>))</code></pre>
+          </div>
+        </div>
+
+        <div class="bento-card bc-wide">
+          <div class="bc-badge">📄 Published · iScience Journal</div>
+          <h3>Tumor Microenvironment Analysis</h3>
+          <p>Analyzed <strong>1.2M+</strong> spatial data points from <strong>30+</strong> brain tumors. Designed fencing algorithms to cluster immune cells around cancer cells, revealing ICI response correlations. Published in <em>iScience</em>.</p>
+          <div class="bc-stack"><span>Python</span><span>R</span><span>Pandas</span><span>Statistical Modeling</span><span>Spatial Analysis</span></div>
+          <a href="https://github.com/dchavan2192/Nationwide-Children-s-Hospital---Research" target="_blank" class="bc-link">View Research →</a>
+          <div class="bc-metric-bg">1.2M+</div>
+          <div class="card-code">
+            <div class="cc-bar"><span class="cc-dot r"></span><span class="cc-dot y"></span><span class="cc-dot g"></span><span class="cc-fname">NRvR.py</span></div>
+<pre class="cc-pre"><code><span class="k">def</span> <span class="fn">dbscan_fraction_near_cancer</span>(
+        df, radius=<span class="n">50</span>, eps=<span class="n">35</span>, min_samples=<span class="n">5</span>):
+    cancer = df[df[<span class="s">"cell_type"</span>] == <span class="s">"cancer"</span>][
+        [<span class="s">"x"</span>, <span class="s">"y"</span>]].values
+    immune = df[df[<span class="s">"cell_type"</span>] == <span class="s">"immune"</span>][
+        [<span class="s">"x"</span>, <span class="s">"y"</span>]].values
+    tree = <span class="cn">KDTree</span>(cancer)
+    dists, _ = tree.query(immune, k=<span class="n">1</span>)
+    near = immune[dists.flatten() &lt;= radius]
+    <span class="k">if</span> <span class="fn">len</span>(near) &lt; min_samples:
+        <span class="k">return</span> <span class="n">0.0</span>, <span class="n">-1</span>
+    labels = <span class="cn">DBSCAN</span>(
+        eps=eps, min_samples=min_samples
+    ).fit_predict(near)
+    clusters = <span class="fn">len</span>(<span class="fn">set</span>(labels) - {-<span class="n">1</span>})
+    <span class="k">return</span> <span class="fn">len</span>(near) / <span class="fn">len</span>(immune), clusters</code></pre>
+          </div>
+        </div>
+
+        <div class="bento-card bc-med">
+          <div class="bc-img">
+            <img src="assets/teststand.png" alt="3-DOF attitude test stand showing pitch, roll, and yaw axes" loading="lazy">
+          </div>
+          <div class="bc-eyebrow">Aerospace · Controls · AIAA</div>
+          <h3>3-DOF Attitude Test Stand</h3>
+          <p>Designed and built a 3-axis attitude control test stand for drone flight dynamics. Custom encoder-driven rig measuring pitch, roll &amp; yaw. Submitted to <strong>AIAA SciTech 2026</strong>.</p>
+          <div class="bc-stack"><span>MATLAB</span><span>Arduino</span><span>Kalman Filter</span><span>Encoders</span><span>CAD</span></div>
+          <a href="https://github.com/dchavan2192/Research-OSU-WildFire" target="_blank" class="bc-link">View Research →</a>
+          <div class="card-code">
+            <div class="cc-bar"><span class="cc-dot r"></span><span class="cc-dot y"></span><span class="cc-dot g"></span><span class="cc-fname">attitude_filter.m</span></div>
+<pre class="cc-pre"><code><span class="k">function</span> [q, P] = <span class="fn">ekf_update</span>(q, P, gyro, dt)
+  F = <span class="fn">state_transition</span>(q, gyro, dt);
+  Q = <span class="n">1e-4</span> * <span class="fn">eye</span>(<span class="n">4</span>);
+  P = F*P*F' + Q;
+  z = <span class="fn">encoder_meas</span>();
+  H = <span class="fn">meas_jacobian</span>(q);
+  K = P*H' / (H*P*H' + R);
+  q = q + K*(z - <span class="fn">h</span>(q));
+  q = q / <span class="fn">norm</span>(q);
+  P = (<span class="fn">eye</span>(<span class="n">4</span>) - K*H) * P;
+<span class="k">end</span></code></pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ RESEARCH & RECOGNITION ═══ -->
+  <section id="research" class="section">
+    <div class="container">
+      <p class="eyebrow reveal">// 005 · research &amp; recognition</p>
+      <h2 class="section-h reveal">Published &amp; recognized.</h2>
+
+      <!-- Publications — paper card style -->
+      <div class="pub-list">
+
+        <div class="paper-card reveal">
+          <div class="paper-meta">
+            <span class="paper-venue">iScience · Cell Press</span>
+            <span class="paper-status published">Published</span>
+          </div>
+          <h3 class="paper-title">Computational Modeling of Immune Response in Glioblastoma Tumor Microenvironments</h3>
+          <p class="paper-authors">D. Chavan et al. · Nationwide Children's Hospital</p>
+          <p class="paper-abstract">Analyzed 1.2M+ spatial data points from 30+ brain tumor samples. Designed fencing algorithms to spatially cluster immune cells around cancer cells, revealing cell-type correlations linked to ICI response. Multi-year analysis pipeline built in Python and R.</p>
+          <div class="paper-stats">
+            <span>📊 1.2M+ data points</span>
+            <span>🧬 30+ tumor samples</span>
+            <span>🔬 Computational Biology</span>
+          </div>
+        </div>
+
+        <div class="paper-card reveal">
+          <div class="paper-meta">
+            <span class="paper-venue">RESNA International Conference 2025</span>
+            <span class="paper-status published">Published</span>
+          </div>
+          <h3 class="paper-title">Assistive Technology Outcomes: ML Analysis of Patient Data to Improve Clinical Decision-Making</h3>
+          <p class="paper-authors">D. Chavan (Second Author) · OSU Wexner Medical Center</p>
+          <p class="paper-abstract">Analyzed 4,000+ patient data points to identify demographic correlations in assistive technology usage patterns. Applied hypothesis testing and Power BI dashboards. Findings led to a measurable 25% improvement in clinical outcomes, presented to treating clinicians.</p>
+          <div class="paper-stats">
+            <span>📊 4,000+ patients</span>
+            <span>👥 2,000+ RehabWeek attendees</span>
+            <span>📈 25% outcome improvement</span>
+          </div>
+        </div>
+
+        <div class="paper-card reveal">
+          <div class="paper-meta">
+            <span class="paper-venue">AIAA 2025 · Aerospace Sciences</span>
+            <span class="paper-status submitted">Under Review</span>
+          </div>
+          <h3 class="paper-title">Test Stand Design &amp; Construction for Affordable and Safe Drone Flight Tests</h3>
+          <p class="paper-authors">D. Chavan · OSU Dept. of Mechanical &amp; Aerospace Engineering</p>
+          <p class="paper-abstract">Lightweight convolutional models for real-time wildfire classification deployed on autonomous drones. Custom IMU (Arduino + BNO055 + ESP32) with Kalman Filter achieving 85% reduction in orientation error for indoor navigation during reconnaissance missions.</p>
+          <div class="paper-stats">
+            <span>🤖 On-drone inference</span>
+            <span>📉 85% orientation error reduction</span>
+            <span>🔥 Edge AI · Embedded ML</span>
+          </div>
+        </div>
+
+        <div class="paper-card reveal">
+          <div class="paper-meta">
+            <span class="paper-venue">RESNA International Conference 2026</span>
+            <span class="paper-status submitted">Submitted</span>
+          </div>
+          <h3 class="paper-title">Using Functional Mobility Assessment Data to Make Informed Service Delivery Decisions in an Assistive Technology Clinic: A Quality Improvement Program</h3>
+          <p class="paper-authors">D. Chavan · OSU Wexner Medical Center — Assistive Technology</p>
+          <p class="paper-abstract">Continuation of RESNA 2025 work leveraging Functional Mobility Assessment data to drive evidence-based service delivery improvements in a clinical assistive technology setting. Applies statistical modeling to long-term outcome predictors across patient subgroups.</p>
+          <div class="paper-stats">
+            <span>📊 Expanded cohort</span>
+            <span>🏥 Clinical ML</span>
+            <span>📅 2026</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Awards & Other -->
+      <div class="awards-grid reveal">
+        <div class="award-card">
+          <span class="award-icon">🏆</span>
+          <div>
+            <p class="award-title">1st Place — OSU College of Medicine Appathon</p>
+            <p class="award-sub">iOS lymphedema detection app · 95% accuracy · Feb 2024</p>
+          </div>
+        </div>
+        <div class="award-card">
+          <span class="award-icon">🎓</span>
+          <div>
+            <p class="award-title">Honors &amp; Scholars — Ohio State University</p>
+            <p class="award-sub">GPA 3.7 · Data Analytics · Expected May 2027</p>
+          </div>
+        </div>
+        <div class="award-card">
+          <span class="award-icon">🤝</span>
+          <div>
+            <p class="award-title">Mount Scholars Leadership Society</p>
+            <p class="award-sub">75+ mentoring hours · Team Security lead · Aug 2023–Present</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact" class="section section-alt">
+    <div class="container">
+      <div class="contact-wrap reveal">
+        <p class="eyebrow">// 006 · contact</p>
+        <h2 class="contact-h">Let's build<br/>something.</h2>
+        <p class="contact-sub">Targeting summer/fall 2026 internships in <strong>ML engineering</strong>, <strong>computer vision</strong>, <strong>edge AI</strong>, and <strong>computational research</strong>.</p>
+        <div class="seeking-chips">
+          <span class="sk-chip">ML Engineer</span>
+          <span class="sk-chip">Research Scientist</span>
+          <span class="sk-chip">Data Scientist</span>
+          <span class="sk-chip">Edge AI</span>
+          <span class="sk-chip">Computer Vision</span>
+        </div>
+        <a href="mailto:dhruvchavan59@gmail.com" class="contact-email">
+          dhruvchavan59@gmail.com
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <div class="contact-links">
+          <a href="https://github.com/dchavan2192" target="_blank">GitHub</a>
+          <span class="cl-dot">·</span>
+          <a href="https://linkedin.com/in/dhruvchavan" target="_blank">LinkedIn</a>
+          <span class="cl-dot">·</span>
+          <a href="tel:6147059999">(614) 705-9999</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <span>Dhruv Chavan © 2025</span>
+      <span class="fd">·</span>
+      <span>Data Analytics @ OSU</span>
+      <span class="fd">·</span>
+      <span class="footer-mono">Built with Python energy</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

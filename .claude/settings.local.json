@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"/Users/dineshchavan/Downloads/testStandimg.png\" /Users/dineshchavan/projects/portfolio-dhruv/assets/teststand.png)",
+      "Bash(cp \"/Users/dineshchavan/Downloads/DroneBuilding \\(1\\).png\" /Users/dineshchavan/projects/portfolio-dhruv/assets/drone-build.png)",
+      "Bash(pip3 install:*)",
+      "Bash(python3 -c \"import pypdf; r = pypdf.PdfReader\\(''/Users/dineshchavan/projects/portfolio-dhruv/resume.pdf''\\); [print\\(p.extract_text\\(\\)\\) for p in r.pages]\")",
+      "Bash(python3 -m venv /tmp/pdfenv)",
+      "Bash(/tmp/pdfenv/bin/pip install:*)",
+      "Bash(/tmp/pdfenv/bin/python3 -c \"import pypdf; r = pypdf.PdfReader\\(''/Users/dineshchavan/projects/portfolio-dhruv/resume.pdf''\\); [print\\(p.extract_text\\(\\)\\) for p in r.pages]\")",
+      "Bash(brew install:*)",
+      "Bash(pdftoppm -r 150 -l 1 /Users/dineshchavan/projects/portfolio-dhruv/resume.pdf /tmp/resume_pg)",
+      "Read(//private/tmp/**)",
+      "Bash(pdfinfo resume-robotics.pdf)",
+      "Bash(pdftoppm -r 120 -f 2 -l 2 /Users/dineshchavan/projects/portfolio-dhruv/resume-robotics.pdf /tmp/rob2_pg)",
+      "Bash(sips -s format png /tmp/rob2_pg-2.ppm --out /tmp/rob2_pg2.png)",
+      "Bash(pdftoppm -r 130 -l 1 /Users/dineshchavan/projects/portfolio-dhruv/resume-ds.pdf /tmp/final_ds)",
+      "Bash(sips -s format png /tmp/final_ds-1.ppm --out /tmp/final_ds.png)",
+      "Bash(pdftoppm -r 130 -l 1 /Users/dineshchavan/projects/portfolio-dhruv/resume-robotics.pdf /tmp/final_rob)",
+      "Bash(sips -s format png /tmp/final_rob-1.ppm --out /tmp/final_rob.png)"
+    ]
+  }
+}
