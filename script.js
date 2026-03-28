@@ -501,13 +501,26 @@ function initTabs() {
   const panels = document.querySelectorAll('.exp-panel');
   if (!tabs.length) return;
 
+  function triggerFloater(panel) {
+    const floater = panel?.querySelector('.ep-floater');
+    if (!floater) return;
+    floater.classList.remove('run');
+    void floater.offsetWidth;
+    floater.classList.add('run');
+  }
+
+  // Fire on the initially active panel
+  triggerFloater(document.querySelector('.exp-panel.active'));
+
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       const idx = tab.dataset.tab;
       tabs.forEach(t => t.classList.remove('active'));
       panels.forEach(p => p.classList.remove('active'));
       tab.classList.add('active');
-      document.querySelector(`.exp-panel[data-panel="${idx}"]`)?.classList.add('active');
+      const panel = document.querySelector(`.exp-panel[data-panel="${idx}"]`);
+      panel?.classList.add('active');
+      triggerFloater(panel);
     });
   });
 }
