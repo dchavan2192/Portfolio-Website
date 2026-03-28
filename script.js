@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ─── LOADER ─── */
 function initLoader() {
+  initLoaderCanvas();
   const loader   = document.getElementById('loader');
   const terminal = document.getElementById('loaderTerminal');
   const bar      = document.getElementById('loaderBar');
@@ -41,7 +42,7 @@ function initLoader() {
     { text: 'loading model weights   [98.2% acc]',     tag: 'ok',    pct: 45 },
     { text: 'compiling CUDA kernels',                  tag: 'ok',    pct: 60 },
     { text: 'mounting neural canvas',                  tag: 'ok',    pct: 74 },
-    { text: 'checking internship status',              tag: 'warn',  pct: 85, warn: 'seeking' },
+    { text: 'checking internship status',              tag: 'ok',    pct: 85, okText: '✓ secured · JPMC' },
     { text: 'boot complete — welcome',                 tag: null,    pct: 100 },
   ];
 
@@ -72,7 +73,7 @@ function initLoader() {
       if (step.tag === 'ok') {
         const ok = document.createElement('span');
         ok.className = 'lt-ok';
-        ok.textContent = '✓ ok';
+        ok.textContent = step.okText || '✓ ok';
         line.appendChild(ok);
       } else if (step.tag === 'warn') {
         const warn = document.createElement('span');
@@ -97,6 +98,82 @@ function initLoader() {
       }
     }, delay);
   });
+}
+
+/* ─── LOADER NEURAL NETWORK ─── */
+function initLoaderCanvas() {
+  const canvas = document.getElementById('loaderCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const W = canvas.width, H = canvas.height;
+
+  const layerCounts = [4, 6, 8, 6, 4, 2];
+  const padX = W * 0.1, padY = H * 0.18;
+
+  const nodesByLayer = layerCounts.map((count, li) => {
+    const x = padX + (W - 2 * padX) * li / (layerCounts.length - 1);
+    return Array.from({ length: count }, (_, ni) => ({
+      x,
+      y: count > 1 ? padY + (H - 2 * padY) * ni / (count - 1) : H / 2
+    }));
+  });
+
+  const edges = [];
+  for (let li = 0; li < layerCounts.length - 1; li++) {
+    nodesByLayer[li].forEach(a => {
+      nodesByLayer[li + 1].forEach(b => {
+        edges.push({ a, b, t: Math.random() });
+      });
+    });
+  }
+
+  const allNodes = nodesByLayer.flat();
+  const loader   = document.getElementById('loader');
+  let raf;
+
+  function draw() {
+    if (!loader || loader.classList.contains('done')) {
+      cancelAnimationFrame(raf);
+      return;
+    }
+    ctx.clearRect(0, 0, W, H);
+
+    edges.forEach(e => {
+      e.t = (e.t + 0.003) % 1;
+      ctx.strokeStyle = 'rgba(96,165,250,0.1)';
+      ctx.lineWidth = 0.7;
+      ctx.beginPath();
+      ctx.moveTo(e.a.x, e.a.y);
+      ctx.lineTo(e.b.x, e.b.y);
+      ctx.stroke();
+
+      const px = e.a.x + (e.b.x - e.a.x) * e.t;
+      const py = e.a.y + (e.b.y - e.a.y) * e.t;
+      const g = ctx.createRadialGradient(px, py, 0, px, py, 5);
+      g.addColorStop(0, 'rgba(96,165,250,0.9)');
+      g.addColorStop(1, 'rgba(96,165,250,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(px, py, 5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    allNodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(96,165,250,0.18)';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(96,165,250,0.6)';
+      ctx.lineWidth = 0.9;
+      ctx.stroke();
+    });
+
+    raf = requestAnimationFrame(draw);
+  }
+
+  raf = requestAnimationFrame(draw);
 }
 
 /* ─── CUSTOM CURSOR ─── */
