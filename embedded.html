@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhruv Chavan — Embedded Systems & Robotics</title>
+  <meta name="description" content="Dhruv Chavan — Embedded Systems & Robotics engineer. ROS2, C++, Arduino, Kalman Filter, AIAA published, Honda Aircraft." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="portfolio.css" />
+  <style>
+    /* ES track accent overrides */
+    :root {
+      --accent:       #2563eb;
+      --accent-light: #dbeafe;
+      --accent-dark:  #1e40af;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="pf-nav">
+  <div class="pf-nav-inner">
+    <a class="nav-back" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 7 L2 7"/><path d="M6 3 L2 7 L6 11"/>
+      </svg>
+      back
+    </a>
+
+    <span class="nav-brand">Dhruv Chavan</span>
+    <span class="nav-track-pill">Embedded Systems &amp; Robotics</span>
+
+    <div class="nav-links-right">
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#research">Research</a>
+      <a href="#contact">Contact</a>
+      <a href="es-resume.pdf" download class="nav-resume-btn">Resume</a>
+    </div>
+
+    <button class="nav-hamburger" id="pf-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="pf-mobile-menu" id="pf-mobile-menu">
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#research">Research</a>
+    <a href="#contact">Contact</a>
+    <a href="es-resume.pdf" download>Download Resume</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="pf-hero" id="hero">
+  <div class="container hero-content">
+
+    <div class="hero-tag reveal">
+      <span class="dot"></span>
+      Ohio State · Mechanical &amp; Aerospace Engineering · AIAA Published
+    </div>
+
+    <h1 class="hero-title reveal reveal-d1">
+      Building autonomous systems —<br/>
+      from <em>wildfire drones</em> to flight simulators.
+    </h1>
+
+    <p class="hero-sub reveal reveal-d2">
+      Undergraduate researcher at OSU building hardware-software systems that fly, navigate, and sense. Kalman filters, ROS2 stacks, embedded C++, and a published test stand accepted at AIAA 2026.
+    </p>
+
+    <div class="hero-highlights reveal reveal-d3">
+      <span class="hero-chip">ROS2</span>
+      <span class="hero-chip">C++</span>
+      <span class="hero-chip">Arduino / ESP32</span>
+      <span class="hero-chip">Kalman Filter</span>
+      <span class="hero-chip">AIAA 2026 Published</span>
+      <span class="hero-chip">Honda Aircraft</span>
+      <span class="hero-chip">Marvelmind Navigation</span>
+      <span class="hero-chip">BNO055 IMU</span>
+    </div>
+
+    <div class="hero-actions reveal reveal-d4">
+      <a href="#experience" class="btn btn-dark">View Experience</a>
+      <a href="#projects" class="btn btn-outline">See Projects</a>
+      <a href="es-resume.pdf" download class="btn btn-outline">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Resume
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills" class="section section-alt">
+  <div class="container">
+    <p class="eyebrow reveal">Skills</p>
+    <h2 class="section-title reveal reveal-d1">Tech stack.</h2>
+    <p class="section-sub reveal reveal-d2">Hardware-to-software. From bare-metal firmware to full autonomy stacks.</p>
+
+    <div class="skills-grid">
+      <div class="skill-group reveal reveal-d1">
+        <p class="sg-label">Languages</p>
+        <div class="sg-chips">
+          <span class="sg-chip">Python</span>
+          <span class="sg-chip">C++</span>
+          <span class="sg-chip">MATLAB</span>
+          <span class="sg-chip">Linux</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-d2">
+        <p class="sg-label">Hardware &amp; Platforms</p>
+        <div class="sg-chips">
+          <span class="sg-chip">Arduino</span>
+          <span class="sg-chip">Raspberry Pi</span>
+          <span class="sg-chip">Jetson</span>
+          <span class="sg-chip">BNO055 IMU</span>
+          <span class="sg-chip">ESP32</span>
+          <span class="sg-chip">Marvelmind</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-d3">
+        <p class="sg-label">Tools &amp; Frameworks</p>
+        <div class="sg-chips">
+          <span class="sg-chip">ROS2</span>
+          <span class="sg-chip">OpenCV</span>
+          <span class="sg-chip">SciKit-Learn</span>
+          <span class="sg-chip">GitHub</span>
+          <span class="sg-chip">CMake</span>
+          <span class="sg-chip">Fusion 360</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience" class="section">
+  <div class="container">
+    <p class="eyebrow reveal">Experience</p>
+    <h2 class="section-title reveal reveal-d1">Where I've built.</h2>
+    <p class="section-sub reveal reveal-d2">Research, industry, and clinical settings — all with a hardware or systems angle.</p>
+
+    <div class="exp-stack">
+
+      <!-- Aerospace -->
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div>
+            <p class="exp-role">Undergraduate Aerospace Researcher</p>
+            <p class="exp-org">@ OSU Dept. of Mechanical &amp; Aerospace Engineering</p>
+          </div>
+          <span class="exp-date">Jan 2025 – Present</span>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Python</span>
+          <span class="exp-tag">MATLAB</span>
+          <span class="exp-tag">C++</span>
+          <span class="exp-tag">ROS2</span>
+          <span class="exp-tag">Arduino</span>
+          <span class="exp-tag">Kalman Filter</span>
+          <span class="exp-tag">CAD</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Reducing drone orientation error by <mark>85%</mark> by implementing Kalman filter on BNO055 IMU from scratch</li>
+          <li>Designed a 3-DOF IMU test stand with ground truth encoder feedback; accepted at <mark>AIAA 2026</mark></li>
+          <li>Engineering <mark>&le;10ms</mark> latency sidestick controller for <strong>Honda Aircraft Co.</strong> simulator with <mark>500Hz</mark> force feedback</li>
+          <li>Achieving <mark>2cm</mark> accuracy and <mark>95%</mark> success rate using Marvelmind-based autonomous drone indoor navigation</li>
+          <li>Producing <mark>5cm</mark> navigation accuracy by architecting a ground robot in C++/Python on Raspberry Pi</li>
+          <li>Developing a wildfire payload fusing RGB and infrared sensors with Jetson inference at <mark>30ms</mark> and <mark>92%</mark> accuracy</li>
+        </ul>
+      </div>
+
+      <!-- BMW -->
+      <div class="exp-card reveal reveal-d1">
+        <div class="exp-header">
+          <div>
+            <p class="exp-role">Data and AI Engineering Intern</p>
+            <p class="exp-org">@ BMW Financial Services</p>
+          </div>
+          <span class="exp-date">Sep – Dec 2025</span>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Python</span>
+          <span class="exp-tag">PostgreSQL</span>
+          <span class="exp-tag">Docker</span>
+          <span class="exp-tag">LLMs</span>
+          <span class="exp-tag">MCP</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built MCP server tools connecting internal LLMs to PostgreSQL, improving data retrieval efficiency by <mark>45%</mark></li>
+          <li>Developed <mark>3</mark> Gen AI apps spanning fraud detection, business intelligence, and call center automation</li>
+          <li>Launched an AI governance platform enabling <mark>95+</mark> employees to submit model requests for compliance protocols</li>
+        </ul>
+      </div>
+
+      <!-- Wexner -->
+      <div class="exp-card reveal reveal-d2">
+        <div class="exp-header">
+          <div>
+            <p class="exp-role">Undergraduate Student Researcher</p>
+            <p class="exp-org">@ OSU Wexner Medical Center — Assistive Technology</p>
+          </div>
+          <span class="exp-date">Jul 2024 – Present</span>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Python</span>
+          <span class="exp-tag">Pandas</span>
+          <span class="exp-tag">Power BI</span>
+          <span class="exp-tag">MySQL</span>
+          <span class="exp-tag">Matplotlib</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Analyzing <mark>4,000+</mark> patient data points; findings presented to clinicians led to a <mark>25%</mark> improvement in outcomes</li>
+          <li>Applying hypothesis testing to identify demographic correlations in assistive technology usage</li>
+          <li>Published as second author at RESNA; presented at <mark>2025 RehabWeek</mark> to 2,000+ attendees</li>
+        </ul>
+      </div>
+
+      <!-- Nationwide -->
+      <div class="exp-card reveal reveal-d3">
+        <div class="exp-header">
+          <div>
+            <p class="exp-role">Undergraduate Computational Biology Researcher</p>
+            <p class="exp-org">@ Nationwide Children's Hospital — Immune Response Modeling</p>
+          </div>
+          <span class="exp-date">Feb 2024 – Jun 2025</span>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Python</span>
+          <span class="exp-tag">R</span>
+          <span class="exp-tag">Pandas</span>
+          <span class="exp-tag">Statistical Modeling</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Analyzed <mark>1.2M+</mark> spatial data points from <mark>30+</mark> brain tumors for ICI response research</li>
+          <li>Designed fencing algorithms to cluster and analyze immune cell interactions with cancer cells</li>
+          <li>Published in <em>iScience</em> journal after multi-year analysis pipeline development</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects" class="section section-alt">
+  <div class="container">
+    <p class="eyebrow reveal">Projects</p>
+    <h2 class="section-title reveal reveal-d1">Things I've built.</h2>
+    <p class="section-sub reveal reveal-d2">Autonomous vehicles, test stands, and embedded systems from idea to hardware.</p>
+
+    <div class="projects-grid">
+
+      <!-- Bugatti — featured -->
+      <div class="proj-card featured reveal">
+        <span class="proj-badge">Featured Project · May 2026</span>
+        <h3 class="proj-title">Autonomous Lego Technic Bugatti</h3>
+        <ul class="proj-bullets">
+          <li>Achieved <mark>80%</mark> lane-following accuracy via adaptive thresholding at <mark>30fps</mark>, publishing steering commands at <mark>20Hz</mark></li>
+          <li>Reduced path deviation by <mark>75%</mark> fusing IMU with camera via Extended Kalman Filter over camera-only baseline</li>
+          <li>Architected a <mark>7-node</mark> ROS2 Jazzy stack separating perception, planning, and safety layers — mirroring production AV stacks</li>
+          <li>Engineered safety node stopping the vehicle within <mark>20cm</mark>; achieved <mark>76%</mark> parallel parking success rate over 25 trials</li>
+        </ul>
+        <div class="video-placeholder">
+          <span class="vp-icon">&#9654;</span>
+          Demo video coming soon
+        </div>
+        <div class="proj-stack">
+          <span>Python</span><span>C++</span><span>ROS2</span><span>OpenCV</span>
+          <span>Arduino</span><span>Fusion 360</span><span>Kalman Filter</span>
+        </div>
+        <a href="https://github.com/dchavan2192" target="_blank" class="proj-link">View on GitHub &#8594;</a>
+      </div>
+
+      <!-- Test Stand -->
+      <div class="proj-card reveal reveal-d1">
+        <span class="proj-badge">AIAA 2026 · Accepted</span>
+        <h3 class="proj-title">3-DOF Attitude Test Stand</h3>
+        <ul class="proj-bullets">
+          <li>Designed and built a 3-axis attitude control test stand for drone flight dynamics validation</li>
+          <li>Custom encoder-driven rig measuring pitch, roll &amp; yaw with ground truth feedback</li>
+          <li>Implemented Kalman Filter fusion achieving <mark>85%</mark> reduction in orientation error vs. raw IMU</li>
+          <li>Submitted and accepted as first author at AIAA SciTech 2026</li>
+        </ul>
+        <div class="proj-stack">
+          <span>MATLAB</span><span>Arduino</span><span>BNO055 IMU</span>
+          <span>Kalman Filter</span><span>Encoders</span><span>CAD</span>
+        </div>
+        <a href="https://github.com/dchavan2192/Research-OSU-WildFire" target="_blank" class="proj-link">View Research &#8594;</a>
+      </div>
+
+      <!-- Wildfire Drone -->
+      <div class="proj-card reveal reveal-d2">
+        <span class="proj-badge">OSU Aerospace · Active</span>
+        <h3 class="proj-title">Wildfire Detection Drone Payload</h3>
+        <ul class="proj-bullets">
+          <li>Building fused RGB + infrared payload with Jetson inference at <mark>30ms</mark> latency and <mark>92%</mark> detection accuracy</li>
+          <li>Custom IMU (Arduino + BNO055 + ESP32) for indoor navigation during reconnaissance missions</li>
+          <li>Marvelmind ultrasonic positioning system achieving <mark>2cm</mark> accuracy indoors</li>
+        </ul>
+        <div class="proj-stack">
+          <span>Python</span><span>Arduino</span><span>ESP32</span>
+          <span>Jetson</span><span>Marvelmind</span><span>OpenCV</span>
+        </div>
+        <a href="https://github.com/dchavan2192/Research-OSU-WildFire" target="_blank" class="proj-link">View Research &#8594;</a>
+      </div>
+
+      <!-- Honda Sidestick -->
+      <div class="proj-card reveal reveal-d3">
+        <span class="proj-badge">Industry Collaboration</span>
+        <h3 class="proj-title">Honda Aircraft Active Sidestick Controller</h3>
+        <ul class="proj-bullets">
+          <li>Engineering a flight-grade Active Sidestick Controller for a Honda Aircraft Co. flight simulator</li>
+          <li>Achieving <mark>&le;10ms</mark> control latency with <mark>500Hz</mark> haptic force feedback loop</li>
+          <li>Built in C++ with real-time embedded constraints for pilot training environments</li>
+        </ul>
+        <div class="proj-stack">
+          <span>C++</span><span>Embedded Systems</span>
+          <span>Real-time Control</span><span>Haptic Feedback</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESEARCH ═══ -->
+<section id="research" class="section">
+  <div class="container">
+    <p class="eyebrow reveal">Research &amp; Publications</p>
+    <h2 class="section-title reveal reveal-d1">Published &amp; recognized.</h2>
+    <p class="section-sub reveal reveal-d2">First-author aerospace work alongside multi-disciplinary research collaborations.</p>
+
+    <div class="research-list">
+
+      <div class="paper-card reveal">
+        <div class="paper-meta">
+          <span class="paper-venue">AIAA SciTech 2026 · Aerospace Sciences</span>
+          <span class="paper-status accepted">Accepted</span>
+        </div>
+        <h3 class="paper-title">Test Stand Design &amp; Construction for Affordable and Safe Drone Flight Tests</h3>
+        <p class="paper-authors">D. Chavan (First Author) · OSU Dept. of Mechanical &amp; Aerospace Engineering</p>
+      </div>
+
+      <div class="paper-card reveal reveal-d1">
+        <div class="paper-meta">
+          <span class="paper-venue">iScience · Cell Press</span>
+          <span class="paper-status published">Published</span>
+        </div>
+        <h3 class="paper-title">Computational Modeling of Immune Response in Glioblastoma Tumor Microenvironments</h3>
+        <p class="paper-authors">D. Chavan (Second Author) · Nationwide Children's Hospital</p>
+      </div>
+
+      <div class="paper-card reveal reveal-d2">
+        <div class="paper-meta">
+          <span class="paper-venue">RESNA International Conference 2025</span>
+          <span class="paper-status published">Published</span>
+        </div>
+        <h3 class="paper-title">Assistive Technology Outcomes: Analysis of Patient Data to Improve Clinical Decision-Making</h3>
+        <p class="paper-authors">D. Chavan (Second Author) · OSU Wexner Medical Center · Presented at RehabWeek 2025</p>
+      </div>
+
+      <div class="paper-card reveal reveal-d3">
+        <div class="paper-meta">
+          <span class="paper-venue">RESNA International Conference 2026</span>
+          <span class="paper-status submitted">Submitted</span>
+        </div>
+        <h3 class="paper-title">Using Functional Mobility Assessment Data to Make Informed Service Delivery Decisions in an Assistive Technology Clinic</h3>
+        <p class="paper-authors">D. Chavan · OSU Wexner Medical Center — Assistive Technology</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <p class="eyebrow">Contact</p>
+    <h2 class="section-title">Let's work together.</h2>
+    <p class="section-sub">Open to embedded systems, robotics, and aerospace engineering opportunities.</p>
+
+    <div class="contact-links">
+      <a href="mailto:dhruvchavan59@gmail.com" class="contact-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+        </svg>
+        dhruvchavan59@gmail.com
+      </a>
+      <a href="https://github.com/dchavan2192" target="_blank" class="contact-link">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        github.com/dchavan2192
+      </a>
+      <a href="https://linkedin.com/in/dhruvchavan" target="_blank" class="contact-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+        LinkedIn
+      </a>
+      <a href="tel:6147059999" class="contact-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.24 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        (614) 705-9999
+      </a>
+    </div>
+
+    <a href="es-resume.pdf" download class="contact-resume">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Download ES Resume
+    </a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="pf-footer">
+  <p>Dhruv Chavan &copy; 2026 &nbsp;&middot;&nbsp; Data Analytics @ Ohio State &nbsp;&middot;&nbsp; Embedded Systems &amp; Robotics Track</p>
+</footer>
+
+<script src="portfolio.js"></script>
+</body>
+</html>
