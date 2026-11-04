@@ -3,442 +3,273 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dhruv Chavan — Embedded Systems & Robotics</title>
-  <meta name="description" content="Dhruv Chavan — Embedded Systems & Robotics engineer. ROS2, C++, Arduino, Kalman Filter, AIAA published, Honda Aircraft." />
+  <title>Dhruv Chavan — Embedded Systems &amp; Robotics</title>
+  <meta name="description" content="Dhruv Chavan — Embedded Systems & Robotics. ROS2, C++, Kalman filters, AIAA 2026, Honda Aircraft collaboration." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="portfolio.css" />
-  <style>
-    /* ES track accent overrides */
-    :root {
-      --accent:       #2563eb;
-      --accent-light: #dbeafe;
-      --accent-dark:  #1e40af;
-    }
-  </style>
 </head>
 <body>
 
-<!-- ═══ NAVIGATION ═══ -->
-<nav class="pf-nav">
-  <div class="pf-nav-inner">
-    <a class="nav-back" href="index.html">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 7 L2 7"/><path d="M6 3 L2 7 L6 11"/>
-      </svg>
-      back
-    </a>
-
-    <span class="nav-brand">Dhruv Chavan</span>
-    <span class="nav-track-pill">Embedded Systems &amp; Robotics</span>
-
-    <div class="nav-links-right">
-      <a href="#skills">Skills</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="home-link" href="index.html"><span>&larr;</span>Dhruv Chavan</a>
+    <nav class="topnav">
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
-      <a href="#research">Research</a>
-      <a href="#contact">Contact</a>
-      <a href="es-resume.pdf" download class="nav-resume-btn">Resume</a>
-    </div>
-
-    <button class="nav-hamburger" id="pf-hamburger" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+      <a class="opt" href="#research">Research</a>
+      <a class="resume" href="es-resume.pdf" download>Resume</a>
+    </nav>
   </div>
-  <div class="pf-mobile-menu" id="pf-mobile-menu">
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#research">Research</a>
-    <a href="#contact">Contact</a>
-    <a href="es-resume.pdf" download>Download Resume</a>
-  </div>
-</nav>
+</header>
 
-<!-- ═══ HERO ═══ -->
-<section class="pf-hero" id="hero">
-  <div class="container hero-content">
+<main class="wrap">
 
-    <div class="hero-tag reveal">
-      <span class="dot"></span>
-      Ohio State · Mechanical &amp; Aerospace Engineering · AIAA Published
-    </div>
-
-    <h1 class="hero-title reveal reveal-d1">
-      Building autonomous systems —<br/>
-      from <em>wildfire drones</em> to flight simulators.
-    </h1>
-
-    <p class="hero-sub reveal reveal-d2">
-      Undergraduate researcher at OSU building hardware-software systems that fly, navigate, and sense. Kalman filters, ROS2 stacks, embedded C++, and a published test stand accepted at AIAA 2026.
+  <section class="intro">
+    <h1>Dhruv Chavan</h1>
+    <p class="role">Embedded Systems &amp; Robotics · Ohio State</p>
+    <p class="lede">
+      I build hardware and software that flies, drives and senses: Kalman filters on low-cost IMUs, ROS2 stacks,
+      embedded C++ and drone test rigs. Undergraduate researcher in OSU Mechanical &amp; Aerospace Engineering.
     </p>
-
-    <div class="hero-highlights reveal reveal-d3">
-      <span class="hero-chip">ROS2</span>
-      <span class="hero-chip">C++</span>
-      <span class="hero-chip">Arduino / ESP32</span>
-      <span class="hero-chip">Kalman Filter</span>
-      <span class="hero-chip">AIAA 2026 Published</span>
-      <span class="hero-chip">Honda Aircraft</span>
-      <span class="hero-chip">Marvelmind Navigation</span>
-      <span class="hero-chip">BNO055 IMU</span>
+    <div class="links">
+      <a href="mailto:dhruvchavan59@gmail.com">dhruvchavan59@gmail.com</a>
+      <a href="https://github.com/dchavan2192" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/dhruvchavan" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="es-resume.pdf" download>Resume (PDF)</a>
     </div>
+  </section>
 
-    <div class="hero-actions reveal reveal-d4">
-      <a href="#experience" class="btn btn-dark">View Experience</a>
-      <a href="#projects" class="btn btn-outline">See Projects</a>
-      <a href="es-resume.pdf" download class="btn btn-outline">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-        Resume
-      </a>
-    </div>
+  <section class="section" id="experience">
+    <h2>Experience</h2>
+    <div class="section-body">
 
-  </div>
-</section>
-
-<!-- ═══ SKILLS ═══ -->
-<section id="skills" class="section section-alt">
-  <div class="container">
-    <p class="eyebrow reveal">Skills</p>
-    <h2 class="section-title reveal reveal-d1">Tech stack.</h2>
-    <p class="section-sub reveal reveal-d2">Hardware-to-software. From bare-metal firmware to full autonomy stacks.</p>
-
-    <div class="skills-grid">
-      <div class="skill-group reveal reveal-d1">
-        <p class="sg-label">Languages</p>
-        <div class="sg-chips">
-          <span class="sg-chip">Python</span>
-          <span class="sg-chip">C++</span>
-          <span class="sg-chip">MATLAB</span>
-          <span class="sg-chip">Linux</span>
+      <article class="entry">
+        <div class="entry-head">
+          <h3>Summer Analyst</h3>
+          <span class="date">Summer 2026</span>
         </div>
-      </div>
-      <div class="skill-group reveal reveal-d2">
-        <p class="sg-label">Hardware &amp; Platforms</p>
-        <div class="sg-chips">
-          <span class="sg-chip">Arduino</span>
-          <span class="sg-chip">Raspberry Pi</span>
-          <span class="sg-chip">Jetson</span>
-          <span class="sg-chip">BNO055 IMU</span>
-          <span class="sg-chip">ESP32</span>
-          <span class="sg-chip">Marvelmind</span>
-        </div>
-      </div>
-      <div class="skill-group reveal reveal-d3">
-        <p class="sg-label">Tools &amp; Frameworks</p>
-        <div class="sg-chips">
-          <span class="sg-chip">ROS2</span>
-          <span class="sg-chip">OpenCV</span>
-          <span class="sg-chip">SciKit-Learn</span>
-          <span class="sg-chip">GitHub</span>
-          <span class="sg-chip">CMake</span>
-          <span class="sg-chip">Fusion 360</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        <p class="org">JPMorgan Chase &amp; Co. — Chase Leadership Development Program (incoming)</p>
+      </article>
 
-<!-- ═══ EXPERIENCE ═══ -->
-<section id="experience" class="section">
-  <div class="container">
-    <p class="eyebrow reveal">Experience</p>
-    <h2 class="section-title reveal reveal-d1">Where I've built.</h2>
-    <p class="section-sub reveal reveal-d2">Research, industry, and clinical settings — all with a hardware or systems angle.</p>
-
-    <div class="exp-stack">
-
-      <!-- JPMC -->
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <div>
-            <p class="exp-role">Summer Analyst</p>
-            <p class="exp-org">@ JPMorgan Chase &amp; Co. — Chase Leadership Development Program</p>
-          </div>
-          <span class="exp-date">Summer 2026 · Incoming</span>
+      <article class="entry">
+        <div class="entry-head">
+          <h3>Undergraduate Aerospace Researcher</h3>
+          <span class="date">Jan 2025 – Present</span>
         </div>
-        <div class="exp-tags">
-          <span class="exp-tag">Incoming</span>
-        </div>
-      </div>
-
-      <!-- Aerospace -->
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <div>
-            <p class="exp-role">Undergraduate Aerospace Researcher</p>
-            <p class="exp-org">@ OSU Dept. of Mechanical &amp; Aerospace Engineering</p>
-          </div>
-          <span class="exp-date">Jan 2025 – Present</span>
-        </div>
-        <div class="exp-tags">
-          <span class="exp-tag">Python</span>
-          <span class="exp-tag">MATLAB</span>
-          <span class="exp-tag">C++</span>
-          <span class="exp-tag">ROS2</span>
-          <span class="exp-tag">Arduino</span>
-          <span class="exp-tag">Kalman Filter</span>
-          <span class="exp-tag">CAD</span>
-        </div>
-        <ul class="exp-bullets">
-          <li>Reducing drone orientation error by <mark>85%</mark> by implementing Kalman filter on BNO055 IMU from scratch</li>
-          <li>Designed a 3-DOF IMU test stand with ground truth encoder feedback; accepted at <mark>AIAA 2026</mark></li>
-          <li>Engineering <mark>&le;10ms</mark> latency sidestick controller for <strong>Honda Aircraft Co.</strong> simulator with <mark>500Hz</mark> force feedback</li>
-          <li>Achieving <mark>2cm</mark> accuracy and <mark>95%</mark> success rate using Marvelmind-based autonomous drone indoor navigation</li>
-          <li>Producing <mark>5cm</mark> navigation accuracy by architecting a ground robot in C++/Python on Raspberry Pi</li>
-          <li>Developing a wildfire payload fusing RGB and infrared sensors with Jetson inference at <mark>30ms</mark> and <mark>92%</mark> accuracy</li>
+        <p class="org">OSU Dept. of Mechanical &amp; Aerospace Engineering</p>
+        <ul>
+          <li>Reduced drone orientation error by 85% by implementing a Kalman filter on a BNO055 IMU from scratch</li>
+          <li>Designed a 3-DOF IMU test stand with ground-truth encoder feedback; accepted at AIAA 2026</li>
+          <li>Engineering a &le;10 ms latency sidestick controller with 500 Hz force feedback for a Honda Aircraft Co. simulator</li>
+          <li>2 cm accuracy and 95% success rate in autonomous indoor drone navigation using Marvelmind positioning</li>
+          <li>Architected a ground robot in C++/Python on Raspberry Pi with 5 cm navigation accuracy</li>
+          <li>Developing a wildfire payload fusing RGB and infrared sensors, with Jetson inference at 30 ms and 92% accuracy</li>
         </ul>
-      </div>
+        <p class="stack">Python · MATLAB · C++ · ROS2 · Arduino · Kalman Filter · CAD</p>
+      </article>
 
-      <!-- BMW -->
-      <div class="exp-card reveal reveal-d1">
-        <div class="exp-header">
-          <div>
-            <p class="exp-role">Data and AI Engineering Intern</p>
-            <p class="exp-org">@ BMW Financial Services</p>
-          </div>
-          <span class="exp-date">Sep – Dec 2025</span>
+      <article class="entry">
+        <div class="entry-head">
+          <h3>Data and AI Engineering Intern</h3>
+          <span class="date">Sep – Dec 2025</span>
         </div>
-        <div class="exp-tags">
-          <span class="exp-tag">Python</span>
-          <span class="exp-tag">PostgreSQL</span>
-          <span class="exp-tag">Docker</span>
-          <span class="exp-tag">LLMs</span>
-          <span class="exp-tag">MCP</span>
-        </div>
-        <ul class="exp-bullets">
-          <li>Built MCP server tools connecting internal LLMs to PostgreSQL, improving data retrieval efficiency by <mark>45%</mark></li>
-          <li>Developed <mark>3</mark> Gen AI apps spanning fraud detection, business intelligence, and call center automation</li>
-          <li>Launched an AI governance platform enabling <mark>95+</mark> employees to submit model requests for compliance protocols</li>
+        <p class="org">BMW Financial Services</p>
+        <ul>
+          <li>Built MCP server tools connecting internal LLMs to PostgreSQL, improving data retrieval efficiency by 45%</li>
+          <li>Developed 3 GenAI apps spanning fraud detection, business intelligence, and call center automation</li>
+          <li>Launched an AI governance platform enabling 95+ employees to submit model requests for compliance review</li>
         </ul>
-      </div>
+        <p class="stack">Python · PostgreSQL · Docker · LLMs · MCP</p>
+      </article>
 
-      <!-- Wexner -->
-      <div class="exp-card reveal reveal-d2">
-        <div class="exp-header">
-          <div>
-            <p class="exp-role">Undergraduate Student Researcher</p>
-            <p class="exp-org">@ OSU Wexner Medical Center — Assistive Technology</p>
-          </div>
-          <span class="exp-date">Jul 2024 – Present</span>
+      <article class="entry">
+        <div class="entry-head">
+          <h3>Undergraduate Student Researcher</h3>
+          <span class="date">Jul 2024 – Present</span>
         </div>
-        <div class="exp-tags">
-          <span class="exp-tag">Python</span>
-          <span class="exp-tag">Pandas</span>
-          <span class="exp-tag">Power BI</span>
-          <span class="exp-tag">MySQL</span>
-          <span class="exp-tag">Matplotlib</span>
-        </div>
-        <ul class="exp-bullets">
-          <li>Analyzing <mark>4,000+</mark> patient data points; findings presented to clinicians led to a <mark>25%</mark> improvement in outcomes</li>
+        <p class="org">OSU Wexner Medical Center — Assistive Technology</p>
+        <ul>
+          <li>Analyzing 4,000+ patient data points; findings presented to clinicians led to a 25% improvement in outcomes</li>
           <li>Applying hypothesis testing to identify demographic correlations in assistive technology usage</li>
-          <li>Published as second author at RESNA; presented at <mark>2025 RehabWeek</mark> to 2,000+ attendees</li>
+          <li>Published as second author at RESNA; presented at 2025 RehabWeek to 2,000+ attendees</li>
         </ul>
-      </div>
+        <p class="stack">Python · Pandas · Power BI · MySQL</p>
+      </article>
 
-      <!-- Nationwide -->
-      <div class="exp-card reveal reveal-d3">
-        <div class="exp-header">
-          <div>
-            <p class="exp-role">Undergraduate Computational Biology Researcher</p>
-            <p class="exp-org">@ Nationwide Children's Hospital — Immune Response Modeling</p>
-          </div>
-          <span class="exp-date">Feb 2024 – Jun 2025</span>
+      <article class="entry">
+        <div class="entry-head">
+          <h3>Undergraduate Computational Biology Researcher</h3>
+          <span class="date">Feb 2024 – Jun 2025</span>
         </div>
-        <div class="exp-tags">
-          <span class="exp-tag">Python</span>
-          <span class="exp-tag">R</span>
-          <span class="exp-tag">Pandas</span>
-          <span class="exp-tag">Statistical Modeling</span>
-        </div>
-        <ul class="exp-bullets">
-          <li>Analyzed <mark>1.2M+</mark> spatial data points from <mark>30+</mark> brain tumors for ICI response research</li>
+        <p class="org">Nationwide Children's Hospital — Immune Response Modeling</p>
+        <ul>
+          <li>Analyzed 1.2M+ spatial data points from 30+ brain tumors for ICI response research</li>
           <li>Designed fencing algorithms to cluster and analyze immune cell interactions with cancer cells</li>
-          <li>Published in <em>iScience</em> journal after multi-year analysis pipeline development</li>
         </ul>
-      </div>
+        <p class="stack">Python · R · Pandas · Statistical Modeling</p>
+      </article>
 
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ PROJECTS ═══ -->
-<section id="projects" class="section section-alt">
-  <div class="container">
-    <p class="eyebrow reveal">Projects</p>
-    <h2 class="section-title reveal reveal-d1">Things I've built.</h2>
-    <p class="section-sub reveal reveal-d2">Autonomous vehicles, test stands, and embedded systems from idea to hardware.</p>
+  <section class="section" id="projects">
+    <h2>Projects</h2>
+    <div class="section-body">
 
-    <div class="projects-grid">
-
-      <!-- Bugatti — featured -->
-      <div class="proj-card featured reveal">
-        <span class="proj-badge">Featured Project · May 2026</span>
-        <h3 class="proj-title">Autonomous Lego Technic Bugatti</h3>
-        <ul class="proj-bullets">
-          <li>Achieved <mark>80%</mark> lane-following accuracy via adaptive thresholding at <mark>30fps</mark>, publishing steering commands at <mark>20Hz</mark></li>
-          <li>Reduced path deviation by <mark>75%</mark> fusing IMU with camera via Extended Kalman Filter over camera-only baseline</li>
-          <li>Architected a <mark>7-node</mark> ROS2 Jazzy stack separating perception, planning, and safety layers — mirroring production AV stacks</li>
-          <li>Engineered safety node stopping the vehicle within <mark>20cm</mark>; achieved <mark>76%</mark> parallel parking success rate over 25 trials</li>
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://github.com/dchavan2192/autonomous-Bugatti" target="_blank" rel="noopener">Autonomous Lego Technic Bugatti</a></h3>
+          <span class="date">May 2026</span>
+        </div>
+        <ul>
+          <li>80% lane-following accuracy via adaptive thresholding at 30 fps, publishing steering commands at 20 Hz</li>
+          <li>Cut path deviation by 75% by fusing IMU and camera with an Extended Kalman Filter</li>
+          <li>7-node ROS2 Jazzy stack separating perception, planning and safety layers, mirroring production AV stacks</li>
+          <li>Safety node stops the vehicle within 20 cm; 76% parallel-parking success over 25 trials</li>
         </ul>
-        <div class="video-placeholder">
-          <span class="vp-icon">&#9654;</span>
-          Demo video coming soon
-        </div>
-        <div class="proj-stack">
-          <span>Python</span><span>C++</span><span>ROS2</span><span>OpenCV</span>
-          <span>Arduino</span><span>Fusion 360</span><span>Kalman Filter</span>
-        </div>
-        <a href="https://github.com/dchavan2192/autonomous-Bugatti" target="_blank" class="proj-link">View on GitHub &#8594;</a>
-      </div>
+        <p class="stack">Python · C++ · ROS2 · OpenCV · Arduino · Fusion 360</p>
+      </article>
 
-      <!-- Test Stand -->
-      <div class="proj-card reveal reveal-d1">
-        <span class="proj-badge">AIAA 2026 · Accepted</span>
-        <h3 class="proj-title">3-DOF Attitude Test Stand</h3>
-        <ul class="proj-bullets">
-          <li>Designed and built a 3-axis attitude control test stand for drone flight dynamics validation</li>
-          <li>Custom encoder-driven rig measuring pitch, roll &amp; yaw with ground truth feedback</li>
-          <li>Implemented Kalman Filter fusion achieving <mark>85%</mark> reduction in orientation error vs. raw IMU</li>
-          <li>Submitted and accepted as first author at AIAA SciTech 2026</li>
-        </ul>
-        <div class="proj-stack">
-          <span>MATLAB</span><span>Arduino</span><span>BNO055 IMU</span>
-          <span>Kalman Filter</span><span>Encoders</span><span>CAD</span>
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://github.com/dchavan2192/Research-OSU-IMU-Dev" target="_blank" rel="noopener">3-DOF Attitude Test Stand</a></h3>
+          <span class="date">AIAA 2026</span>
         </div>
-        <a href="https://github.com/dchavan2192/Research-OSU-WildFire" target="_blank" class="proj-link">View Research &#8594;</a>
-      </div>
+        <ul>
+          <li>Three-axis test stand for validating drone attitude estimation, with encoders giving ground-truth pitch, roll and yaw</li>
+          <li>Kalman filter fusion cut orientation error by 85% versus the raw IMU</li>
+        </ul>
+        <figure class="shot">
+          <img src="assets/img/teststand.jpg" loading="lazy" alt="The 3-DOF test stand showing pitch, roll and yaw axes and the four encoders" />
+        </figure>
+        <p class="stack">MATLAB · Arduino · BNO055 IMU · Encoders · CAD</p>
+        <a class="more" href="aiaa-2026-teststand.pdf" target="_blank" rel="noopener">Read paper (PDF) &rarr;</a>
+      </article>
 
-      <!-- Wildfire Drone -->
-      <div class="proj-card reveal reveal-d2">
-        <span class="proj-badge">OSU Aerospace · Active</span>
-        <h3 class="proj-title">Wildfire Detection Drone Payload</h3>
-        <ul class="proj-bullets">
-          <li>Building fused RGB + infrared payload with Jetson inference at <mark>30ms</mark> latency and <mark>92%</mark> detection accuracy</li>
-          <li>Custom IMU (Arduino + BNO055 + ESP32) for indoor navigation during reconnaissance missions</li>
-          <li>Marvelmind ultrasonic positioning system achieving <mark>2cm</mark> accuracy indoors</li>
-        </ul>
-        <div class="proj-stack">
-          <span>Python</span><span>Arduino</span><span>ESP32</span>
-          <span>Jetson</span><span>Marvelmind</span><span>OpenCV</span>
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://github.com/dchavan2192/Research-OSU-WildFire" target="_blank" rel="noopener">Wildfire Detection Drone Payload</a></h3>
+          <span class="date">Ongoing</span>
         </div>
-        <a href="https://github.com/dchavan2192/Research-OSU-WildFire" target="_blank" class="proj-link">View Research &#8594;</a>
-      </div>
+        <ul>
+          <li>Fused RGB and infrared payload with Jetson inference at 30 ms latency and 92% detection accuracy</li>
+          <li>Custom IMU (Arduino, BNO055, ESP32) and Marvelmind ultrasonic positioning for 2 cm indoor accuracy</li>
+        </ul>
+        <figure class="shot">
+          <img src="assets/img/drone-build.jpg" loading="lazy" alt="Drone frame, propellers and flight controller laid out on a lab bench during the build" />
+        </figure>
+        <p class="stack">Python · Arduino · ESP32 · Jetson · Marvelmind · OpenCV</p>
+      </article>
 
-      <!-- Honda Sidestick -->
-      <div class="proj-card reveal reveal-d3">
-        <span class="proj-badge">Industry Collaboration</span>
-        <h3 class="proj-title">Honda Aircraft Active Sidestick Controller</h3>
-        <ul class="proj-bullets">
-          <li>Engineering a flight-grade Active Sidestick Controller for a Honda Aircraft Co. flight simulator</li>
-          <li>Achieving <mark>&le;10ms</mark> control latency with <mark>500Hz</mark> haptic force feedback loop</li>
-          <li>Built in C++ with real-time embedded constraints for pilot training environments</li>
-        </ul>
-        <div class="proj-stack">
-          <span>C++</span><span>Embedded Systems</span>
-          <span>Real-time Control</span><span>Haptic Feedback</span>
+      <article class="entry">
+        <div class="entry-head">
+          <h3>Honda Aircraft Active Sidestick Controller</h3>
+          <span class="date">Industry collaboration</span>
         </div>
-      </div>
+        <ul>
+          <li>Flight-grade active sidestick for a Honda Aircraft Co. flight simulator, with &le;10 ms control latency and a 500 Hz haptic feedback loop</li>
+          <li>Written in C++ under real-time embedded constraints</li>
+        </ul>
+        <p class="stack">C++ · Embedded · Real-time control · Haptics</p>
+      </article>
 
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ RESEARCH ═══ -->
-<section id="research" class="section">
-  <div class="container">
-    <p class="eyebrow reveal">Research &amp; Publications</p>
-    <h2 class="section-title reveal reveal-d1">Published &amp; recognized.</h2>
-    <p class="section-sub reveal reveal-d2">First-author aerospace work alongside multi-disciplinary research collaborations.</p>
+  <section class="section" id="personal">
+    <h2>Personal projects</h2>
+    <div class="section-body">
 
-    <div class="research-list">
-
-      <div class="paper-card reveal">
-        <div class="paper-meta">
-          <span class="paper-venue">AIAA SciTech 2026 · Aerospace Sciences</span>
-          <span class="paper-status accepted">Accepted</span>
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://github.com/dchavan2192/notch" target="_blank" rel="noopener">Notch</a></h3>
+          <span class="date">macOS · Swift</span>
         </div>
-        <h3 class="paper-title">Test Stand Design &amp; Construction for Affordable and Safe Drone Flight Tests</h3>
-        <p class="paper-authors">D. Chavan &amp; A. Jhemi (First Author) · OSU Dept. of Mechanical &amp; Aerospace Engineering</p>
-        <a href="aiaa-2026-teststand.pdf" target="_blank" class="proj-link" style="margin-top:0.6rem;">View Paper &#8594;</a>
-      </div>
+        <p class="note">
+          A free, open-source study companion that lives in the MacBook notch. Hover over it and it expands into
+          a Pomodoro timer, assignment tracker, calendar, now-playing controls, file shelf with PDF conversion,
+          clipboard history and notes. Runs fully local with no dependencies.
+        </p>
+        <p class="stack">Swift · SwiftUI · AppKit · EventKit</p>
+        <a class="more" href="https://github.com/dchavan2192/notch" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+      </article>
 
-      <div class="paper-card reveal reveal-d1">
-        <div class="paper-meta">
-          <span class="paper-venue">iScience · Cell Press</span>
-          <span class="paper-status published">Published</span>
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://github.com/dchavan2192/blockcraft-ds" target="_blank" rel="noopener">BlockCraft DS</a></h3>
+          <span class="date">Nintendo DS · C</span>
         </div>
-        <h3 class="paper-title">Computational Modeling of Immune Response in Glioblastoma Tumor Microenvironments</h3>
-        <p class="paper-authors">D. Chavan (Second Author) · Nationwide Children's Hospital</p>
-        <a href="https://www.csbj.org/article/S2001-0370(25)00531-8/fulltext" target="_blank" class="proj-link" style="margin-top:0.6rem;">View Publication &#8594;</a>
-      </div>
-
-      <div class="paper-card reveal reveal-d2">
-        <div class="paper-meta">
-          <span class="paper-venue">RESNA International Conference 2025</span>
-          <span class="paper-status published">Published</span>
-        </div>
-        <h3 class="paper-title">Assistive Technology Outcomes: Analysis of Patient Data to Improve Clinical Decision-Making</h3>
-        <p class="paper-authors">D. Chavan (Second Author) · OSU Wexner Medical Center · Presented at RehabWeek 2025</p>
-        <a href="https://www.resna.org/sites/default/files/conference/2025/StudentScientificPapers/85.html" target="_blank" class="proj-link" style="margin-top:0.6rem;">View Publication &#8594;</a>
-      </div>
-
+        <p class="note">
+          A block-building survival game for the Nintendo DS and DSi, written from scratch in C. Procedural
+          worlds with biomes and caves, around 100 crafting recipes, mobs, day/night cycle, flowing water and lava,
+          touch-screen inventory and SD card saves. All art, sound and music are generated from code.
+        </p>
+        <figure class="shot pixel">
+          <img src="assets/img/blockcraft-banner.png" width="1060" height="192" loading="lazy" alt="BlockCraft DS scenes: plains, sunset, a lava cave and a lake" />
+        </figure>
+        <p class="stack">C · libnds · Procedural generation</p>
+        <a class="more" href="https://github.com/dchavan2192/blockcraft-ds" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+      </article>
 
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ CONTACT ═══ -->
-<section id="contact" class="contact-section">
-  <div class="container">
-    <p class="eyebrow">Contact</p>
-    <h2 class="section-title">Let's work together.</h2>
-    <p class="section-sub">Open to embedded systems, robotics, and aerospace engineering opportunities.</p>
+  <section class="section" id="research">
+    <h2>Publications</h2>
+    <div class="section-body">
 
-    <div class="contact-links">
-      <a href="mailto:dhruvchavan59@gmail.com" class="contact-link">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-        </svg>
-        dhruvchavan59@gmail.com
-      </a>
-      <a href="https://github.com/dchavan2192" target="_blank" class="contact-link">
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
-          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-        </svg>
-        github.com/dchavan2192
-      </a>
-      <a href="https://linkedin.com/in/dhruvchavan" target="_blank" class="contact-link">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
-        LinkedIn
-      </a>
-      <a href="tel:6147059999" class="contact-link">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.24 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-        </svg>
-        (614) 705-9999
-      </a>
+      <article class="entry">
+        <h3><a href="aiaa-2026-teststand.pdf" target="_blank" rel="noopener">Test Stand Design &amp; Construction for Affordable and Safe Drone Flight Tests</a></h3>
+        <p class="org">D. Chavan &amp; A. Jhemi · AIAA SciTech 2026 (accepted)</p>
+        <a class="more" href="aiaa-2026-teststand.pdf" target="_blank" rel="noopener">Read paper (PDF) &rarr;</a>
+      </article>
+
+      <article class="entry">
+        <h3><a href="https://spj.science.org/doi/abs/10.1016/j.csbj.2025.11.062" target="_blank" rel="noopener">Computational Modeling of Immune Response in Glioblastoma Tumor Microenvironments</a></h3>
+        <p class="org">Second author · Nationwide Children's Hospital</p>
+        <a class="more" href="https://spj.science.org/doi/abs/10.1016/j.csbj.2025.11.062" target="_blank" rel="noopener">View publication &rarr;</a>
+      </article>
+
+      <article class="entry">
+        <h3><a href="https://www.resna.org/sites/default/files/conference/2025/StudentScientificPapers/85.html" target="_blank" rel="noopener">Assistive Technology Outcomes: Analysis of Patient Data to Improve Clinical Decision-Making</a></h3>
+        <p class="org">Second author · RESNA 2025 · Presented at RehabWeek 2025</p>
+        <a class="more" href="https://www.resna.org/sites/default/files/conference/2025/StudentScientificPapers/85.html" target="_blank" rel="noopener">View publication &rarr;</a>
+      </article>
+
     </div>
+  </section>
 
-    <a href="es-resume.pdf" download class="contact-resume">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-      Download ES Resume
-    </a>
-  </div>
-</section>
+  <section class="section" id="skills">
+    <h2>Skills</h2>
+    <div class="section-body">
+      <dl class="skills">
+        <div><dt>Languages</dt><dd>C++, Python, MATLAB, Linux/Bash</dd></div>
+        <div><dt>Hardware</dt><dd>Arduino, Raspberry Pi, Jetson, ESP32, BNO055 IMU, Marvelmind</dd></div>
+        <div><dt>Tools</dt><dd>ROS2, OpenCV, scikit-learn, GitHub, CMake, Fusion 360</dd></div>
+      </dl>
+    </div>
+  </section>
 
-<!-- ═══ FOOTER ═══ -->
-<footer class="pf-footer">
-  <p>Dhruv Chavan &copy; 2026 &nbsp;&middot;&nbsp; Data Analytics @ Ohio State &nbsp;&middot;&nbsp; Embedded Systems &amp; Robotics Track</p>
+  <section class="section" id="contact">
+    <h2>Contact</h2>
+    <div class="section-body">
+      <p class="contact-note">Open to embedded systems, robotics and aerospace engineering roles.</p>
+      <div class="links">
+        <a href="mailto:dhruvchavan59@gmail.com">dhruvchavan59@gmail.com</a>
+        <a href="tel:6147059999">(614) 705-9999</a>
+        <a href="https://github.com/dchavan2192" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/dhruvchavan" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">Dhruv Chavan · 2026 · <a href="ds.html">Data science &amp; AI track &rarr;</a></div>
 </footer>
 
-<script src="portfolio.js"></script>
 </body>
 </html>
