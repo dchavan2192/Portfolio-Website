@@ -185,7 +185,7 @@ p, ul, h1, h2, h3, figure { margin: 0; }
   overflow: hidden;
   background: var(--surface);
 }
-.shot img { width: 100%; }
+.shot img, .shot video { width: 100%; display: block; }
 .shot.pixel img { image-rendering: pixelated; }
 
 .shots {
