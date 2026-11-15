@@ -191,17 +191,18 @@
           <span class="date">Rust · WASM · 2026</span>
         </div>
         <p class="note">
-          A research-grade artificial life platform targeting ALIFE 2027, where creatures with evolvable NEAT
-          neural-net brains compete, cooperate, and speciate in a sealed 2D world. Features sexual reproduction
-          with NEAT crossover, activity-dependent neural metabolism (sparse coding evolves naturally), niche
-          construction (organisms modify local food regrowth — ecological inheritance), epigenetic inheritance
-          (stress-responsive methylation silences genes across generations), open-ended evolution metrics
-          (Bedau's D(t) + topology novelty), pheromone stigmergy, elevation terrain, day/night cycles,
-          temperature gradients, and Hamilton's kin selection — 25+ biological mechanisms backed by 80+ cited papers.
-          195 ticks/s at 4,000 creatures via rayon parallelism and zero-allocation hot loops. 30 tests, full CI. Runs in the browser as a live WASM demo.
+          An artificial-life research platform (targeting ALIFE 2027) where creatures with evolvable NEAT
+          neural-network brains forage, hunt, share energy, and speciate in a deterministic, seeded world.
+          Mechanisms include sexual reproduction with a real twofold cost of sex, niche construction
+          (ecological inheritance), stress-responsive epigenetic inheritance, activity-dependent brain metabolism,
+          droughts, seasons, terrain, and kin selection, each grounded in the biology literature.
+          Open-ended-evolution metrics (Bedau &amp; Packard evolutionary activity) with a neutral-model baseline in progress.
+          The live demo is an explainable 3D view: the Rust engine compiled to WebAssembly drives a Three.js
+          scene with a plain-English event feed, live ecosystem metrics, and a per-creature brain inspector.
+          Zero-allocation hot loops, rayon parallelism, 49 tests, full CI.
         </p>
-        <p class="stack">Rust · NEAT · WASM · macroquad · egui · rayon · Epigenetics · Niche Construction · OEE · Kin Selection · Gompertz Mortality</p>
-        <a class="more" href="https://dchavan2192.github.io/Digital-Terrarium/" target="_blank" rel="noopener">Live demo &rarr;</a>
+        <p class="stack">Rust · NEAT · WebAssembly · Three.js · rayon · Python · Epigenetics · Niche Construction · Open-Ended Evolution</p>
+        <a class="more" href="https://dchavan2192.github.io/Digital-Terrarium/" target="_blank" rel="noopener">Live 3D demo &rarr;</a>
         <a class="more" href="https://github.com/dchavan2192/Digital-Terrarium" target="_blank" rel="noopener" style="margin-left:1rem;">GitHub &rarr;</a>
       </article>
 
