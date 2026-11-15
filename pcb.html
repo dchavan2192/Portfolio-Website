@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhruv Chavan — PCB Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --board:   #09180a;
+      --board2:  #0d2010;
+      --copper:  #c8803a;
+      --gold:    #d4a830;
+      --trace:   #b87333;
+      --silk:    #e4fce4;
+      --silk2:   #8dbf8d;
+      --chip-bg: #0e0e1e;
+      --chip-br: #253025;
+      --green:   #00ff55;
+      --red:     #ff4444;
+      --yellow:  #ffcc00;
+      --blue:    #44aaff;
+      --panel-bg:#07070f;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--board);
+      font-family: 'JetBrains Mono', monospace;
+      overflow: hidden;
+      cursor: none;
+      color: var(--silk);
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /* ── BOOT ─────────────────────────────────────────── */
+    #boot {
+      position: fixed; inset: 0;
+      background: #000;
+      z-index: 2000;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 14px;
+    }
+    #boot.fade { animation: bootFade .7s ease .1s forwards; }
+    @keyframes bootFade { to { opacity: 0; pointer-events: none; } }
+
+    .boot-logo {
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--green); text-shadow: 0 0 24px var(--green);
+      letter-spacing: 6px;
+    }
+    .boot-term { width: 440px; font-size: .68rem; color: #6dff6d; line-height: 1.9; min-height: 140px; }
+    .bl { opacity: 0; animation: bli .12s ease forwards; }
+    @keyframes bli { to { opacity: 1; } }
+    .bl .ok  { color: var(--green); float: right; }
+    .bl .err { color: var(--red);   float: right; }
+    .boot-bar-wrap { width: 440px; height: 2px; background: #1a1a1a; border-radius: 1px; }
+    .boot-bar { height: 100%; background: var(--green); width: 0%; transition: width .35s ease; box-shadow: 0 0 8px var(--green); }
+
+    /* ── CURSORS ──────────────────────────────────────── */
+    #cur-dot {
+      position: fixed; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 8px var(--green);
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: transform .08s;
+    }
+    #cur-ring {
+      position: fixed; width: 26px; height: 26px; border-radius: 50%;
+      border: 1.5px solid rgba(0,255,85,.5);
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: transform .18s ease, width .2s, height .2s, border-color .2s;
+    }
+    #cur-ring.hover { width: 40px; height: 40px; border-color: var(--copper); }
+
+    /* ── HUD ──────────────────────────────────────────── */
+    #hud {
+      position: fixed; top: 20px; left: 20px; z-index: 500;
+      pointer-events: none;
+    }
+    .hud-brand { font-size: .7rem; font-weight: 700; color: var(--green); text-shadow: 0 0 10px var(--green); letter-spacing: 3px; }
+    .hud-sub   { font-size: .55rem; color: var(--silk2); opacity: .7; margin-top: 2px; letter-spacing: 2px; }
+    .hud-info  { margin-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+    .hud-row   { font-size: .52rem; color: var(--silk2); opacity: .6; letter-spacing: 1px; }
+    .hud-row span { color: var(--green); }
+
+    /* ── MINI NAV ─────────────────────────────────────── */
+    #mini-nav {
+      position: fixed; top: 20px; right: 20px; z-index: 500;
+      display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;
+    }
+    .mnb {
+      padding: 5px 11px;
+      border: 1px solid #253025; border-radius: 2px;
+      background: rgba(9,24,10,.85);
+      color: var(--silk2); font-family: 'JetBrains Mono', monospace;
+      font-size: .57rem; letter-spacing: 1.5px;
+      cursor: pointer; transition: border-color .2s, color .2s, box-shadow .2s;
+    }
+    .mnb:hover { border-color: var(--copper); color: var(--silk); box-shadow: 0 0 10px rgba(200,128,58,.2); }
+
+    /* ── HINT ─────────────────────────────────────────── */
+    #hint {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      font-size: .56rem; color: var(--silk2); opacity: .5; letter-spacing: 2px;
+      pointer-events: none; z-index: 400;
+      animation: hintOut 1s ease 5s forwards;
+    }
+    @keyframes hintOut { to { opacity: 0; } }
+
+    /* ── VIEWPORT & BOARD ─────────────────────────────── */
+    #viewport { position: fixed; inset: 0; overflow: hidden; }
+    #board {
+      position: absolute;
+      width: 1920px; height: 1100px;
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+
+    #bg-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    #trace-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+    /* ── TRACES ───────────────────────────────────────── */
+    .tr   { fill: none; stroke: var(--trace); stroke-linecap: round; stroke-linejoin: round; opacity: .65; }
+    .tr-w2 { stroke-width: 2; }
+    .tr-w3 { stroke-width: 3; }
+    .tr-w4 { stroke-width: 4.5; }
+    .tr-thin { stroke-width: 1.5; opacity: .3; }
+    .tr-rail { stroke-width: 4; opacity: .35; }
+
+    .el {
+      fill: none; stroke-width: 14;
+      stroke-linecap: round; stroke-linejoin: round;
+      stroke: rgba(0,255,85,.0);
+      pointer-events: none;
+    }
+
+    .via { fill: var(--trace); }
+    .via-hole { fill: var(--board2); }
+
+    /* ── CHIP COMPONENTS ──────────────────────────────── */
+    .chip {
+      position: absolute;
+      background: var(--chip-bg);
+      border: 1.5px solid var(--chip-br);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, border-color .3s;
+    }
+    .chip:hover {
+      transform: translateY(-5px) scale(1.015);
+      border-color: var(--copper);
+      box-shadow: 0 14px 50px rgba(200,128,58,.25), 0 0 0 1px rgba(200,128,58,.15), inset 0 1px 0 rgba(200,128,58,.1);
+    }
+    .chip::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(0,255,85,.015) 0px, rgba(0,255,85,.015) 1px, transparent 1px, transparent 4px);
+      pointer-events: none; opacity: 0; transition: opacity .3s; border-radius: 3px;
+    }
+    .chip:hover::before { opacity: 1; }
+
+    /* pin rows */
+    .pins-top, .pins-bot { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 9px; }
+    .pins-top { top: -9px; }
+    .pins-bot { bottom: -9px; }
+    .pins-lft, .pins-rgt { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 9px; }
+    .pins-lft { left: -9px; }
+    .pins-rgt { right: -9px; }
+    .pin { background: var(--copper); border-radius: 1px; }
+    .pin-h { width: 11px; height: 8px; }
+    .pin-v { width: 8px; height: 11px; }
+
+    /* chip inner */
+    .chip-body { position: relative; padding: 14px 18px; height: 100%; display: flex; flex-direction: column; }
+    .chip-notch {
+      position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      width: 10px; height: 5px; border-radius: 0 0 8px 8px;
+      background: var(--board2); border: 1px solid #3a4a3a; border-top: 0;
+    }
+    .chip-ref  { font-size: .52rem; color: var(--silk2); opacity: .6; letter-spacing: 2.5px; text-transform: uppercase; margin-top: 6px; }
+    .chip-name { font-size: .82rem; font-weight: 700; color: var(--silk); margin-top: 5px; letter-spacing: .5px; line-height: 1.2; }
+    .chip-desc { font-size: .62rem; color: var(--silk2); margin-top: 5px; line-height: 1.5; flex: 1; }
+    .chip-footer { margin-top: 10px; display: flex; align-items: center; justify-content: space-between; }
+    .chip-hint { font-size: .52rem; color: var(--copper); opacity: .8; }
+
+    .chip-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+    .ctag {
+      padding: 2px 7px; border: 1px solid currentColor; border-radius: 1px;
+      font-size: .52rem; letter-spacing: 1px;
+    }
+    .ctag.g { color: var(--green); }
+    .ctag.c { color: var(--copper); }
+    .ctag.b { color: var(--blue); }
+
+    .chip-bars { margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+    .cbar { height: 2.5px; background: #1a1a2e; border-radius: 2px; overflow: hidden; }
+    .cbar-fill { height: 100%; border-radius: 2px; transform: scaleX(0); transform-origin: left; transition: transform 1.1s cubic-bezier(.4,0,.2,1); }
+    .chip:hover .cbar-fill { transform: scaleX(1); }
+    .cbar-row { display: flex; align-items: center; gap: 8px; }
+    .cbar-lbl { font-size: .5rem; color: var(--silk2); width: 70px; flex-shrink: 0; }
+
+    /* LED */
+    .led {
+      position: absolute; width: 9px; height: 9px; border-radius: 50%;
+      box-shadow: 0 0 8px currentColor;
+    }
+    .led.g { background: var(--green); color: var(--green); animation: lpulse 2s ease-in-out infinite; }
+    .led.r { background: var(--red); color: var(--red); animation: lblink 1.8s ease-in-out infinite; }
+    .led.y { background: var(--yellow); color: var(--yellow); animation: lpulse 2.5s ease-in-out infinite .5s; }
+    .led.b { background: var(--blue); color: var(--blue); animation: lpulse 3s ease-in-out infinite 1s; }
+    @keyframes lpulse {
+      0%,100% { opacity: 1; box-shadow: 0 0 6px currentColor; }
+      50%      { opacity: .7; box-shadow: 0 0 18px currentColor, 0 0 32px currentColor; }
+    }
+    @keyframes lblink {
+      0%,100% { opacity: 1; }
+      50%      { opacity: .25; }
+    }
+
+    /* Connector (J1) */
+    .connector {
+      position: absolute;
+      background: #1a1418;
+      border: 1.5px solid #3a2830;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, border-color .3s;
+    }
+    .connector:hover { border-color: var(--blue); box-shadow: 0 10px 40px rgba(68,170,255,.2); transform: translateY(-4px); }
+    .conn-pins { position: absolute; left: -10px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 6px; }
+    .cpin { width: 10px; height: 6px; background: var(--gold); border-radius: 1px; }
+    .conn-body { padding: 14px 16px; height: 100%; display: flex; flex-direction: column; }
+    .conn-holes { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; flex: 1; justify-content: center; }
+    .conn-hole { height: 8px; background: #0a0a0a; border-radius: 2px; border: 1px solid #2a2020; display: flex; align-items: center; padding: 0 6px; }
+    .conn-hole-lbl { font-size: .48rem; color: var(--silk2); opacity: .6; }
+    .conn-hole-val { font-size: .52rem; color: var(--gold); margin-left: auto; }
+
+    /* Decorative passive components */
+    .deco-cap {
+      position: absolute;
+      width: 14px; height: 20px;
+      background: #1e1e3a; border: 1px solid #4a4a7a; border-radius: 2px;
+    }
+    .deco-cap::after {
+      content: '+'; position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      font-size: .45rem; color: var(--silk2); opacity: .5;
+    }
+    .deco-res {
+      position: absolute; display: flex; align-items: center;
+    }
+    .deco-res-body {
+      width: 28px; height: 9px; background: #3a2a1a; border: 1px solid var(--copper);
+      border-radius: 3px; position: relative;
+    }
+    .deco-res-b1 { position: absolute; width: 3.5px; height: 100%; left: 4px; border-radius: 1px; background: #aa5a00; }
+    .deco-res-b2 { position: absolute; width: 3.5px; height: 100%; left: 9px; border-radius: 1px; background: #aa2200; }
+    .deco-res-b3 { position: absolute; width: 3.5px; height: 100%; left: 14px; border-radius: 1px; background: #880000; }
+    .deco-res-b4 { position: absolute; width: 3.5px; height: 100%; left: 19px; border-radius: 1px; background: #aaaaaa; }
+    .deco-res-lead { width: 12px; height: 1.5px; background: var(--copper); }
+    .deco-xtal {
+      position: absolute;
+      width: 16px; height: 28px;
+      background: #2a2a3a; border: 1px solid #5a5a8a; border-radius: 5px;
+    }
+    .deco-ic-small {
+      position: absolute;
+      background: #0e0e1e; border: 1px solid #2a2a3a; border-radius: 2px;
+    }
+    .deco-tp {
+      position: absolute;
+      width: 7px; height: 7px; border-radius: 50%;
+      border: 1.5px solid var(--copper); background: var(--board);
+    }
+    .deco-tp::after {
+      content: 'TP'; position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      font-size: .4rem; color: var(--silk2); opacity: .5; white-space: nowrap;
+    }
+
+    /* standalone LEDs */
+    .deco-led {
+      position: absolute; width: 10px; height: 10px; border-radius: 50%;
+      box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+    }
+    .deco-led::after {
+      content: attr(data-lbl); position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
+      font-size: .42rem; color: var(--silk2); opacity: .5; white-space: nowrap;
+    }
+
+    /* Board edge markings */
+    .board-label {
+      position: absolute;
+      font-size: .5rem; color: var(--silk2); opacity: .3;
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
+
+    /* ── PANEL ─────────────────────────────────────────── */
+    #panel {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(7,7,15,.97); backdrop-filter: blur(24px);
+      border-top: 1.5px solid var(--copper);
+      padding: 28px 44px 32px;
+      z-index: 600;
+      transform: translateY(100%);
+      transition: transform .45s cubic-bezier(.32,.72,0,1);
+      max-height: 62vh; overflow-y: auto;
+    }
+    #panel.open { transform: translateY(0); }
+    #panel::-webkit-scrollbar { width: 3px; }
+    #panel::-webkit-scrollbar-thumb { background: var(--copper); border-radius: 2px; }
+
+    .ph { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 22px; }
+    .ph-ref   { font-size: .58rem; color: var(--copper); letter-spacing: 3px; text-transform: uppercase; }
+    .ph-title { font-size: 1.5rem; font-weight: 700; color: #fff; margin-top: 4px; }
+    .ph-flex  { flex: 1; }
+    .p-close  {
+      width: 34px; height: 34px; border: 1.5px solid #2a2a3a; border-radius: 3px;
+      background: none; color: var(--silk2); font-size: 1.1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-family: inherit; transition: border-color .2s, color .2s; flex-shrink: 0;
+    }
+    .p-close:hover { border-color: var(--red); color: var(--red); }
+
+    .p-body { font-size: .72rem; color: var(--silk2); line-height: 1.8; }
+    .p-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 14px; }
+    .p-card {
+      background: rgba(255,255,255,.025); border: 1px solid #1e2e1e;
+      border-radius: 3px; padding: 14px 16px;
+      transition: border-color .2s, background .2s;
+    }
+    .p-card:hover { border-color: var(--copper); background: rgba(200,128,58,.05); }
+    .pc-title { font-size: .76rem; font-weight: 600; color: var(--silk); margin-bottom: 4px; }
+    .pc-sub   { font-size: .6rem; color: var(--copper); margin-bottom: 8px; letter-spacing: 1px; }
+    .pc-text  { font-size: .65rem; color: var(--silk2); line-height: 1.6; }
+    .pc-tags  { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+    .ptag     {
+      padding: 2px 7px; border: 1px solid currentColor; border-radius: 1px;
+      font-size: .52rem; letter-spacing: 1px;
+    }
+    .ptag.g { color: var(--green); }
+    .ptag.c { color: var(--copper); }
+    .ptag.b { color: var(--blue); }
+    .ptag.y { color: var(--yellow); }
+
+    .sk-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+    .sk-lbl { font-size: .62rem; width: 110px; flex-shrink: 0; color: var(--silk2); }
+    .sk-trk { flex: 1; height: 3px; background: #1a1a2e; border-radius: 2px; overflow: hidden; }
+    .sk-fill { height: 100%; background: linear-gradient(90deg, var(--copper), var(--green)); border-radius: 2px; width: 0%; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+    .sk-pct { font-size: .58rem; color: var(--copper); width: 30px; text-align: right; flex-shrink: 0; }
+
+    .p-stat { display: flex; gap: 24px; margin-bottom: 16px; }
+    .pstat-item { text-align: center; }
+    .pstat-val { font-size: 1.4rem; font-weight: 700; color: var(--green); }
+    .pstat-key { font-size: .55rem; color: var(--silk2); letter-spacing: 1px; margin-top: 2px; }
+
+    .p-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border: 1px solid #2a3a2a; border-radius: 2px;
+      color: var(--silk2); font-size: .62rem; font-family: inherit;
+      text-decoration: none; transition: border-color .2s, color .2s; margin: 4px 4px 4px 0;
+    }
+    .p-link:hover { border-color: var(--green); color: var(--green); }
+
+    /* board revision */
+    .board-rev {
+      position: absolute; right: 20px; bottom: 20px;
+      font-size: .45rem; color: var(--silk2); opacity: .25; letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ BOOT ══════════════════════════════════════════════ -->
+<div id="boot">
+  <div class="boot-logo">⬡ PCB PORTFOLIO</div>
+  <div class="boot-term" id="boot-term"></div>
+  <div class="boot-bar-wrap"><div class="boot-bar" id="boot-bar"></div></div>
+</div>
+
+<!-- ══ CURSORS ═══════════════════════════════════════════ -->
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<!-- ══ HUD ═══════════════════════════════════════════════ -->
+<div id="hud">
+  <div class="hud-brand">DHRUV.CHAVAN</div>
+  <div class="hud-sub">PCB REV 2.0 · ML / AI ENGINEER</div>
+  <div class="hud-info">
+    <div class="hud-row">STATUS: <span>ACTIVE</span></div>
+    <div class="hud-row">SUPPLY: <span>3.3V · 1.8A</span></div>
+    <div class="hud-row">TEMP:   <span id="hud-temp">42°C</span></div>
+  </div>
+</div>
+
+<!-- ══ MINI NAV ══════════════════════════════════════════ -->
+<div id="mini-nav">
+  <button class="mnb" data-target="hero">CPU</button>
+  <button class="mnb" data-target="skills">RAM</button>
+  <button class="mnb" data-target="experience">MCU</button>
+  <button class="mnb" data-target="projects">FPGA</button>
+  <button class="mnb" data-target="research">SENS</button>
+  <button class="mnb" data-target="contact">CONN</button>
+</div>
+
+<!-- ══ VIEWPORT + BOARD ══════════════════════════════════ -->
+<div id="viewport">
+<div id="board">
+
+  <!-- background canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- SVG TRACES -->
+  <svg id="trace-svg" xmlns="http://www.w3.org/2000/svg">
+    <!-- Power rails -->
+    <line class="tr tr-rail" x1="0" y1="50" x2="1920" y2="50"/>
+    <text x="18" y="44" font-family="JetBrains Mono" font-size="9" fill="#c8803a" opacity=".5">VCC 3.3V</text>
+    <line class="tr tr-rail" x1="0" y1="1050" x2="1920" y2="1050"/>
+    <text x="18" y="1044" font-family="JetBrains Mono" font-size="9" fill="#c8803a" opacity=".5">GND</text>
+
+    <!-- Trace: U2(Skills) → U1(Hero) -->
+    <path id="tr-a" class="tr tr-w3" d="M 390 210 L 500 210 L 500 340 L 590 340"/>
+    <path id="el-a" class="el" d="M 390 210 L 500 210 L 500 340 L 590 340" stroke-dasharray="40 560" stroke-dashoffset="0"/>
+
+    <!-- Trace: U1(Hero) → U3(Experience) -->
+    <path id="tr-b" class="tr tr-w3" d="M 980 390 L 1050 390 L 1050 210 L 1100 210"/>
+    <path id="el-b" class="el" d="M 980 390 L 1050 390 L 1050 210 L 1100 210" stroke-dasharray="40 440" stroke-dashoffset="0"/>
+
+    <!-- Trace: U1(Hero) → U4(Projects) via bottom-right -->
+    <path id="tr-c" class="tr tr-w3" d="M 860 590 L 860 680 L 1220 680 L 1220 570"/>
+    <path id="el-c" class="el" d="M 860 590 L 860 680 L 1220 680 L 1220 570" stroke-dasharray="40 540" stroke-dashoffset="0"/>
+
+    <!-- Trace: U1(Hero) → U5(Research) -->
+    <path id="tr-d" class="tr tr-w3" d="M 680 590 L 680 700 L 250 700 L 250 570"/>
+    <path id="el-d" class="el" d="M 680 590 L 680 700 L 250 700 L 250 570" stroke-dasharray="40 520" stroke-dashoffset="0"/>
+
+    <!-- Trace: U3(Experience) → J1(Contact) -->
+    <path id="tr-e" class="tr tr-w3" d="M 1450 210 L 1510 210 L 1510 400"/>
+    <path id="el-e" class="el" d="M 1450 210 L 1510 210 L 1510 400" stroke-dasharray="40 380" stroke-dashoffset="0"/>
+
+    <!-- Trace: U4(Projects) → J1(Contact) -->
+    <path id="tr-f" class="tr tr-w2" d="M 1430 700 L 1510 700 L 1510 695"/>
+    <path id="el-f" class="el" d="M 1430 700 L 1510 700 L 1510 695" stroke-dasharray="30 200" stroke-dashoffset="0"/>
+
+    <!-- Thin secondary traces (decorative routing) -->
+    <path class="tr tr-thin" d="M 390 160 L 1700 160"/>
+    <path class="tr tr-thin" d="M 140 570 L 140 50"/>
+    <path class="tr tr-thin" d="M 1700 160 L 1700 1050"/>
+    <path class="tr tr-thin" d="M 500 1050 L 500 880"/>
+    <path class="tr tr-thin" d="M 980 50 L 980 310"/>
+    <path class="tr tr-thin" d="M 1220 1050 L 1220 840"/>
+
+    <!-- Via pads -->
+    <circle class="via" cx="500" cy="210" r="6"/><circle class="via-hole" cx="500" cy="210" r="2.5"/>
+    <circle class="via" cx="1050" cy="390" r="6"/><circle class="via-hole" cx="1050" cy="390" r="2.5"/>
+    <circle class="via" cx="860" cy="680" r="6"/><circle class="via-hole" cx="860" cy="680" r="2.5"/>
+    <circle class="via" cx="680" cy="700" r="6"/><circle class="via-hole" cx="680" cy="700" r="2.5"/>
+    <circle class="via" cx="1510" cy="210" r="6"/><circle class="via-hole" cx="1510" cy="210" r="2.5"/>
+    <circle class="via" cx="140" cy="570" r="6"/><circle class="via-hole" cx="140" cy="570" r="2.5"/>
+    <circle class="via" cx="1220" cy="680" r="6"/><circle class="via-hole" cx="1220" cy="680" r="2.5"/>
+
+    <!-- Silkscreen text (component outlines) -->
+    <text x="590" y="302" font-family="JetBrains Mono" font-size="8.5" fill="#e4fce4" opacity=".25">U1</text>
+    <text x="80"  y="82"  font-family="JetBrains Mono" font-size="8.5" fill="#e4fce4" opacity=".25">U2</text>
+    <text x="1100" y="82"  font-family="JetBrains Mono" font-size="8.5" fill="#e4fce4" opacity=".25">U3</text>
+    <text x="1020" y="552" font-family="JetBrains Mono" font-size="8.5" fill="#e4fce4" opacity=".25">U4</text>
+    <text x="80"   y="552" font-family="JetBrains Mono" font-size="8.5" fill="#e4fce4" opacity=".25">U5</text>
+    <text x="1530" y="372" font-family="JetBrains Mono" font-size="8.5" fill="#e4fce4" opacity=".25">J1</text>
+
+    <!-- Mounting holes -->
+    <circle cx="40"  cy="80"   r="8" fill="none" stroke="#c8803a" stroke-width="1.5" opacity=".3"/>
+    <circle cx="40"  cy="80"   r="3" fill="none" stroke="#c8803a" stroke-width="1" opacity=".3"/>
+    <circle cx="1880" cy="80"  r="8" fill="none" stroke="#c8803a" stroke-width="1.5" opacity=".3"/>
+    <circle cx="1880" cy="80"  r="3" fill="none" stroke="#c8803a" stroke-width="1" opacity=".3"/>
+    <circle cx="40"  cy="1060" r="8" fill="none" stroke="#c8803a" stroke-width="1.5" opacity=".3"/>
+    <circle cx="40"  cy="1060" r="3" fill="none" stroke="#c8803a" stroke-width="1" opacity=".3"/>
+    <circle cx="1880" cy="1060" r="8" fill="none" stroke="#c8803a" stroke-width="1.5" opacity=".3"/>
+    <circle cx="1880" cy="1060" r="3" fill="none" stroke="#c8803a" stroke-width="1" opacity=".3"/>
+
+    <!-- Board outline -->
+    <rect x="10" y="10" width="1900" height="1080" fill="none" stroke="#c8803a" stroke-width="2" opacity=".2" rx="4"/>
+  </svg>
+
+  <!-- ═══ U1 HERO CPU ═══════════════════════════════ -->
+  <div class="chip" id="chip-hero" data-section="hero"
+       style="left:590px;top:310px;width:390px;height:270px;">
+    <div class="pins-top">
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+      <div class="pin pin-h"></div><div class="pin pin-h"></div><div class="pin pin-h"></div>
+    </div>
+    <div class="pins-bot">
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+      <div class="pin pin-h"></div><div class="pin pin-h"></div><div class="pin pin-h"></div>
+    </div>
+    <div class="pins-lft">
+      <div class="pin pin-v"></div><div class="pin pin-v"></div>
+      <div class="pin pin-v"></div><div class="pin pin-v"></div>
+    </div>
+    <div class="pins-rgt">
+      <div class="pin pin-v"></div><div class="pin pin-v"></div>
+      <div class="pin pin-v"></div><div class="pin pin-v"></div>
+    </div>
+    <div class="led g" style="top:10px;right:14px;"></div>
+    <div class="chip-body">
+      <div class="chip-notch"></div>
+      <div class="chip-ref">U1 · CENTRAL PROCESSING UNIT · QFP-80</div>
+      <div class="chip-name" style="font-size:1.05rem;margin-top:6px;">DHRUV CHAVAN</div>
+      <div class="chip-desc">Data Scientist &amp; ML Engineer<br/>The Ohio State University · GPA 3.7 · Class of 2027</div>
+      <div class="chip-tags">
+        <span class="ctag g">PyTorch</span>
+        <span class="ctag g">Python</span>
+        <span class="ctag c">Computer Vision</span>
+        <span class="ctag b">Edge AI</span>
+        <span class="ctag c">Research</span>
+      </div>
+      <div class="chip-footer">
+        <span class="chip-hint">◉ CLICK TO INSPECT</span>
+        <span style="font-size:.5rem;color:var(--silk2);opacity:.4;">98.2% ACC</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ U2 SKILLS RAM ════════════════════════════ -->
+  <div class="chip" id="chip-skills" data-section="skills"
+       style="left:80px;top:90px;width:310px;height:210px;">
+    <div class="pins-top">
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+    </div>
+    <div class="pins-bot">
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+    </div>
+    <div class="pins-rgt">
+      <div class="pin pin-v"></div><div class="pin pin-v"></div><div class="pin pin-v"></div>
+    </div>
+    <div class="led y" style="top:10px;right:14px;"></div>
+    <div class="chip-body">
+      <div class="chip-notch"></div>
+      <div class="chip-ref">U2 · SKILL MEMORY MODULE · SODIMM</div>
+      <div class="chip-name">SKILLS &amp; STACK</div>
+      <div class="chip-desc">ML · Data Engineering · Dev Tools</div>
+      <div class="chip-bars">
+        <div class="cbar-row"><span class="cbar-lbl">PyTorch</span><div class="cbar"><div class="cbar-fill" style="width:92%;background:linear-gradient(90deg,var(--copper),var(--green));"></div></div></div>
+        <div class="cbar-row"><span class="cbar-lbl">Python</span><div class="cbar"><div class="cbar-fill" style="width:95%;background:linear-gradient(90deg,var(--copper),var(--green));"></div></div></div>
+        <div class="cbar-row"><span class="cbar-lbl">SQL / PG</span><div class="cbar"><div class="cbar-fill" style="width:80%;background:linear-gradient(90deg,var(--copper),var(--green));"></div></div></div>
+        <div class="cbar-row"><span class="cbar-lbl">MATLAB</span><div class="cbar"><div class="cbar-fill" style="width:75%;background:linear-gradient(90deg,var(--copper),var(--green));"></div></div></div>
+      </div>
+      <div class="chip-footer">
+        <span class="chip-hint">◉ CLICK TO INSPECT</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ U3 EXPERIENCE MCU ════════════════════════ -->
+  <div class="chip" id="chip-experience" data-section="experience"
+       style="left:1100px;top:90px;width:350px;height:260px;">
+    <div class="pins-top">
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+    </div>
+    <div class="pins-bot">
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+    </div>
+    <div class="pins-lft">
+      <div class="pin pin-v"></div><div class="pin pin-v"></div><div class="pin pin-v"></div>
+    </div>
+    <div class="pins-rgt">
+      <div class="pin pin-v"></div><div class="pin pin-v"></div><div class="pin pin-v"></div>
+    </div>
+    <div class="led b" style="top:10px;right:14px;"></div>
+    <div class="chip-body">
+      <div class="chip-notch"></div>
+      <div class="chip-ref">U3 · MICROCONTROLLER UNIT · ARM-32</div>
+      <div class="chip-name">EXPERIENCE</div>
+      <div class="chip-desc">
+        BMW Financial Services · Sep–Dec 2025<br/>
+        OSU Aerospace Research · Jan 2025–Present<br/>
+        Nationwide Children's · 2023–2024<br/>
+        <span style="color:var(--green);font-size:.6rem;">⬡ INCOMING: JPMorgan Chase · Summer 2026</span>
+      </div>
+      <div class="chip-footer">
+        <span class="chip-hint">◉ CLICK TO INSPECT</span>
+        <span style="font-size:.5rem;color:var(--copper);opacity:.7;">4 ROLES</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ U4 PROJECTS FPGA ═════════════════════════ -->
+  <div class="chip" id="chip-projects" data-section="projects"
+       style="left:1020px;top:570px;width:410px;height:265px;">
+    <div class="pins-top">
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+      <div class="pin pin-h"></div><div class="pin pin-h"></div><div class="pin pin-h"></div>
+    </div>
+    <div class="pins-bot">
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+      <div class="pin pin-h"></div><div class="pin pin-h"></div><div class="pin pin-h"></div>
+    </div>
+    <div class="pins-lft">
+      <div class="pin pin-v"></div><div class="pin pin-v"></div>
+      <div class="pin pin-v"></div><div class="pin pin-v"></div>
+    </div>
+    <div class="pins-rgt">
+      <div class="pin pin-v"></div><div class="pin pin-v"></div>
+      <div class="pin pin-v"></div><div class="pin pin-v"></div>
+    </div>
+    <div class="led g" style="top:10px;right:14px;"></div>
+    <div class="chip-body">
+      <div class="chip-notch"></div>
+      <div class="chip-ref">U4 · FPGA LOGIC ARRAY · XC7A100T</div>
+      <div class="chip-name">PROJECTS</div>
+      <div class="chip-desc">
+        Wildfire Detection Drone · CNN 98.2% acc<br/>
+        Spatial Transcriptomics · 1.2M+ data pts<br/>
+        Assistive Tech IMU · BNO055 Kalman Filter
+      </div>
+      <div class="chip-tags" style="margin-top:8px;">
+        <span class="ctag g">PyTorch</span>
+        <span class="ctag c">Arduino</span>
+        <span class="ctag b">ESP32</span>
+        <span class="ctag c">MATLAB</span>
+      </div>
+      <div class="chip-footer">
+        <span class="chip-hint">◉ CLICK TO INSPECT</span>
+        <span style="font-size:.5rem;color:var(--green);opacity:.8;">3 PROJECTS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ U5 RESEARCH SENSOR ═══════════════════════ -->
+  <div class="chip" id="chip-research" data-section="research"
+       style="left:80px;top:570px;width:330px;height:240px;">
+    <div class="pins-top">
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+    </div>
+    <div class="pins-bot">
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+      <div class="pin pin-h"></div><div class="pin pin-h"></div>
+    </div>
+    <div class="pins-rgt">
+      <div class="pin pin-v"></div><div class="pin pin-v"></div><div class="pin pin-v"></div>
+    </div>
+    <div class="led r" style="top:10px;right:14px;"></div>
+    <div class="chip-body">
+      <div class="chip-notch"></div>
+      <div class="chip-ref">U5 · SENSOR ARRAY MODULE · I2C/SPI</div>
+      <div class="chip-name">RESEARCH</div>
+      <div class="chip-desc">
+        iScience (Cell Press) · Published 2024<br/>
+        AIAA SciTech 2025 · Accepted<br/>
+        RESNA 2026 · Submitted
+      </div>
+      <div class="chip-tags" style="margin-top:8px;">
+        <span class="ctag g">Published</span>
+        <span class="ctag c">Accepted</span>
+        <span class="ctag b">Submitted</span>
+      </div>
+      <div class="chip-footer">
+        <span class="chip-hint">◉ CLICK TO INSPECT</span>
+        <span style="font-size:.5rem;color:var(--red);opacity:.8;">3 PAPERS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ J1 CONTACT CONNECTOR ════════════════════ -->
+  <div class="connector" id="chip-contact" data-section="contact"
+       style="left:1530px;top:390px;width:210px;height:305px;">
+    <div class="conn-pins" style="top:30px;transform:none;">
+      <div class="cpin"></div><div class="cpin"></div><div class="cpin"></div>
+      <div class="cpin"></div><div class="cpin"></div><div class="cpin"></div>
+      <div class="cpin"></div><div class="cpin"></div>
+    </div>
+    <div class="led b" style="top:10px;right:12px;"></div>
+    <div class="conn-body">
+      <div class="chip-ref" style="margin-top:4px;">J1 · I/O CONNECTOR · RJ45</div>
+      <div class="chip-name" style="font-size:.85rem;font-weight:700;margin-top:4px;">CONTACT</div>
+      <div class="conn-holes">
+        <div class="conn-hole">
+          <span class="conn-hole-lbl">EMAIL</span>
+          <span class="conn-hole-val">dhruvchavan59@</span>
+        </div>
+        <div class="conn-hole">
+          <span class="conn-hole-lbl">GITHUB</span>
+          <span class="conn-hole-val">dchavan2192</span>
+        </div>
+        <div class="conn-hole">
+          <span class="conn-hole-lbl">LINKEDIN</span>
+          <span class="conn-hole-val">dhruvchavan</span>
+        </div>
+        <div class="conn-hole">
+          <span class="conn-hole-lbl">RESUME</span>
+          <span class="conn-hole-val">resume.pdf</span>
+        </div>
+        <div class="conn-hole" style="border-color:var(--green);opacity:.8;">
+          <span class="conn-hole-lbl" style="color:var(--green);">STATUS</span>
+          <span class="conn-hole-val" style="color:var(--green);">OPEN</span>
+        </div>
+      </div>
+      <div class="chip-hint" style="font-size:.52px;margin-top:8px;">◉ CLICK TO CONNECT</div>
+    </div>
+  </div>
+
+  <!-- ═══ DECORATIVE PASSIVES ══════════════════════ -->
+
+  <!-- Capacitors -->
+  <div class="deco-cap" style="left:556px;top:248px;"></div>
+  <div class="deco-cap" style="left:570px;top:248px;"></div>
+  <div class="deco-cap" style="left:990px;top:260px;"></div>
+  <div class="deco-cap" style="left:1004px;top:260px;"></div>
+  <div class="deco-cap" style="left:990px;top:490px;"></div>
+  <div class="deco-cap" style="left:460px;top:500px;"></div>
+  <div class="deco-cap" style="left:474px;top:500px;"></div>
+
+  <!-- Resistors -->
+  <div class="deco-res" style="left:450px;top:265px;">
+    <div class="deco-res-lead" style="left:-12px;position:relative;"></div>
+    <div class="deco-res-body">
+      <div class="deco-res-b1"></div><div class="deco-res-b2"></div>
+      <div class="deco-res-b3"></div><div class="deco-res-b4"></div>
+    </div>
+    <div class="deco-res-lead"></div>
+  </div>
+  <div class="deco-res" style="left:1490px;top:300px;">
+    <div class="deco-res-lead" style="left:-12px;position:relative;"></div>
+    <div class="deco-res-body">
+      <div class="deco-res-b1"></div><div class="deco-res-b2"></div>
+      <div class="deco-res-b3"></div><div class="deco-res-b4"></div>
+    </div>
+    <div class="deco-res-lead"></div>
+  </div>
+  <div class="deco-res" style="left:790px;top:270px;">
+    <div class="deco-res-lead" style="left:-12px;position:relative;"></div>
+    <div class="deco-res-body">
+      <div class="deco-res-b1"></div><div class="deco-res-b2"></div>
+      <div class="deco-res-b3"></div><div class="deco-res-b4"></div>
+    </div>
+    <div class="deco-res-lead"></div>
+  </div>
+
+  <!-- Crystal oscillator -->
+  <div class="deco-xtal" style="left:545px;top:66px;"></div>
+
+  <!-- Small IC chips (decorative) -->
+  <div class="deco-ic-small" style="left:1720px;top:120px;width:60px;height:40px;"></div>
+  <div class="deco-ic-small" style="left:1720px;top:200px;width:60px;height:40px;"></div>
+  <div class="deco-ic-small" style="left:200px;top:820px;width:50px;height:35px;"></div>
+  <div class="deco-ic-small" style="left:1600px;top:820px;width:50px;height:35px;"></div>
+
+  <!-- Test points -->
+  <div class="deco-tp" style="left:492px;top:163px;"></div>
+  <div class="deco-tp" style="left:1044px;top:342px;"></div>
+  <div class="deco-tp" style="left:854px;top:633px;"></div>
+  <div class="deco-tp" style="left:672px;top:653px;"></div>
+
+  <!-- Standalone LED indicators -->
+  <div class="deco-led led g" data-lbl="PWR"   style="left:160px;top:34px;"></div>
+  <div class="deco-led led b" data-lbl="STS"   style="left:300px;top:34px;"></div>
+  <div class="deco-led led y" data-lbl="ACT"   style="left:780px;top:34px;"></div>
+  <div class="deco-led led r" data-lbl="ERR"   style="left:920px;top:34px;"></div>
+  <div class="deco-led led g" data-lbl="LINK"  style="left:1380px;top:34px;"></div>
+
+  <!-- Board edge markings -->
+  <div class="board-label" style="left:20px;top:16px;">PCB REV 2.0</div>
+  <div class="board-label" style="left:20px;top:26px;">DHRUV CHAVAN PORTFOLIO</div>
+  <div class="board-label" style="left:1700px;top:16px;">MFG: OSU-FAB-2025</div>
+  <div class="board-rev">PCB REV 2.0 · DHRUV CHAVAN · 2025 · OSU ADVANCED MANUFACTURING</div>
+
+</div><!-- /board -->
+</div><!-- /viewport -->
+
+<!-- ══ PANEL ══════════════════════════════════════════════ -->
+<div id="panel">
+  <div class="ph">
+    <div class="ph-flex">
+      <div class="panel-ref" id="p-ref">U1 · CPU</div>
+      <div class="ph-title" id="p-title">Dhruv Chavan</div>
+    </div>
+    <button class="p-close" id="p-close">×</button>
+  </div>
+  <div class="p-body" id="p-body"></div>
+</div>
+
+<p id="hint">DRAG TO PAN THE BOARD · CLICK COMPONENTS TO INSPECT</p>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   PCB PORTFOLIO — script
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── PANEL DATA ─────────────────────────────────────────── */
+const PANELS = {
+  hero: {
+    ref: 'U1 · CENTRAL PROCESSING UNIT',
+    title: 'Dhruv Chavan',
+    render: () => `
+      <div class="p-stat">
+        <div class="pstat-item"><div class="pstat-val">3.7</div><div class="pstat-key">GPA / 4.0</div></div>
+        <div class="pstat-item"><div class="pstat-val">98.2%</div><div class="pstat-key">CNN ACC</div></div>
+        <div class="pstat-item"><div class="pstat-val">1.2M+</div><div class="pstat-key">DATA PTS</div></div>
+        <div class="pstat-item"><div class="pstat-val">4</div><div class="pstat-key">RESEARCH LABS</div></div>
+        <div class="pstat-item"><div class="pstat-val">1st</div><div class="pstat-key">APPATHON RANK</div></div>
+      </div>
+      <p style="margin-bottom:14px;">Data Analytics &amp; Scholars student at <strong style="color:var(--silk)">The Ohio State University</strong>, applying machine learning and statistical modeling to problems that matter. From detecting brain cancer patterns in 1.2M+ spatial data points to building ML-powered wildfire drones, I turn complex data into real decisions.</p>
+      <p style="margin-bottom:18px;">Published in <strong style="color:var(--silk)">iScience (Cell Press)</strong>, accepted at AIAA SciTech 2025, interned at <strong style="color:var(--silk)">BMW Financial Services</strong>, and incoming analyst at <strong style="color:var(--silk)">JPMorgan Chase</strong>.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;">
+        <a class="p-link" href="mailto:dhruvchavan59@gmail.com">✉ dhruvchavan59@gmail.com</a>
+        <a class="p-link" href="https://github.com/dchavan2192" target="_blank">⌥ github/dchavan2192</a>
+        <a class="p-link" href="https://linkedin.com/in/dhruvchavan" target="_blank">◈ linkedin/dhruvchavan</a>
+        <a class="p-link" href="resume.pdf" download>↓ Resume PDF</a>
+      </div>`
+  },
+
+  skills: {
+    ref: 'U2 · SKILL MEMORY MODULE',
+    title: 'Skills & Stack',
+    render: () => `
+      <div class="p-grid">
+        <div>
+          <div style="font-size:.65rem;color:var(--copper);letter-spacing:2px;margin-bottom:14px;">ML / AI</div>
+          ${[['PyTorch',95],['TensorFlow',82],['Scikit-learn',90],['NumPy/Pandas',93],['OpenCV',85],['CUDA / cuDNN',72]].map(([l,v])=>`
+          <div class="sk-row">
+            <span class="sk-lbl">${l}</span>
+            <div class="sk-trk"><div class="sk-fill" data-w="${v}%" style="width:0%"></div></div>
+            <span class="sk-pct">${v}%</span>
+          </div>`).join('')}
+        </div>
+        <div>
+          <div style="font-size:.65rem;color:var(--copper);letter-spacing:2px;margin-bottom:14px;">DATA ENG</div>
+          ${[['SQL / PostgreSQL',80],['MATLAB',75],['R',65],['Spark',58],['dbt',55],['Tableau',70]].map(([l,v])=>`
+          <div class="sk-row">
+            <span class="sk-lbl">${l}</span>
+            <div class="sk-trk"><div class="sk-fill" data-w="${v}%" style="width:0%"></div></div>
+            <span class="sk-pct">${v}%</span>
+          </div>`).join('')}
+        </div>
+        <div>
+          <div style="font-size:.65rem;color:var(--copper);letter-spacing:2px;margin-bottom:14px;">DEV TOOLS</div>
+          ${[['Python',95],['Git / GitHub',90],['Docker',68],['Arduino/ESP32',78],['LLMs / MCP',82],['Linux/Bash',75]].map(([l,v])=>`
+          <div class="sk-row">
+            <span class="sk-lbl">${l}</span>
+            <div class="sk-trk"><div class="sk-fill" data-w="${v}%" style="width:0%"></div></div>
+            <span class="sk-pct">${v}%</span>
+          </div>`).join('')}
+        </div>
+      </div>`
+  },
+
+  experience: {
+    ref: 'U3 · MICROCONTROLLER UNIT',
+    title: 'Work Experience',
+    render: () => `
+      <div class="p-grid">
+        <div class="p-card" style="border-color:var(--green);background:rgba(0,255,85,.03);">
+          <div class="pc-sub">INCOMING · SUMMER 2026</div>
+          <div class="pc-title">Chase Leadership Development Program</div>
+          <div class="pc-sub">JPMorgan Chase &amp; Co.</div>
+          <div class="pc-text">Summer Analyst in the Chase Leadership Development Program — one of the most competitive undergraduate roles at JPMC.</div>
+          <div class="pc-tags"><span class="ptag g">Incoming</span><span class="ptag b">Finance</span><span class="ptag b">Leadership</span></div>
+        </div>
+        <div class="p-card">
+          <div class="pc-sub">SEP – DEC 2025</div>
+          <div class="pc-title">Data and AI Engineering Intern</div>
+          <div class="pc-sub">BMW Financial Services</div>
+          <div class="pc-text">Created ML and GenAI solutions cutting model training cycles by 30%. Built MCP tools for internal LLM use cases improving data retrieval by 40%. Live stakeholder demos of AI-driven pipelines.</div>
+          <div class="pc-tags"><span class="ptag c">PyTorch</span><span class="ptag c">LLMs</span><span class="ptag c">MCP</span><span class="ptag c">PostgreSQL</span></div>
+        </div>
+        <div class="p-card">
+          <div class="pc-sub">JAN 2025 – PRESENT</div>
+          <div class="pc-title">Undergraduate Aerospace Researcher</div>
+          <div class="pc-sub">OSU Dept. of Mechanical &amp; Aerospace Engineering</div>
+          <div class="pc-text">Building on-drone wildfire classification ML system. Custom IMU test stand with BNO055, Kalman filter for orientation estimation. AIAA SciTech 2025 accepted paper.</div>
+          <div class="pc-tags"><span class="ptag c">MATLAB</span><span class="ptag c">Arduino</span><span class="ptag c">Kalman</span><span class="ptag g">AIAA</span></div>
+        </div>
+        <div class="p-card">
+          <div class="pc-sub">2023 – 2024</div>
+          <div class="pc-title">Research Data Analyst</div>
+          <div class="pc-sub">Nationwide Children's Hospital</div>
+          <div class="pc-text">Analyzed 1.2M+ spatial transcriptomics data points. Published in iScience (Cell Press). Presented patient outcome research to clinicians at an international conference.</div>
+          <div class="pc-tags"><span class="ptag g">iScience</span><span class="ptag c">Python</span><span class="ptag c">R</span><span class="ptag b">Published</span></div>
+        </div>
+      </div>`
+  },
+
+  projects: {
+    ref: 'U4 · FPGA LOGIC ARRAY',
+    title: 'Projects',
+    render: () => `
+      <div class="p-grid">
+        <div class="p-card">
+          <div class="pc-sub">OSU AEROSPACE · 2025</div>
+          <div class="pc-title">On-Drone Wildfire Classification</div>
+          <div class="pc-text">Designed and trained a CNN achieving <strong style="color:var(--green)">98.2% accuracy</strong> for wildfire detection from drone-mounted cameras. Edge-deployed on ESP32 microcontroller with custom inference pipeline. AIAA SciTech 2025 paper accepted.</div>
+          <div class="pc-tags"><span class="ptag g">98.2% Acc</span><span class="ptag c">PyTorch</span><span class="ptag c">ESP32</span><span class="ptag b">Edge AI</span><span class="ptag y">AIAA 2025</span></div>
+        </div>
+        <div class="p-card">
+          <div class="pc-sub">NATIONWIDE CHILDREN'S · 2024</div>
+          <div class="pc-title">Spatial Transcriptomics Analysis</div>
+          <div class="pc-text">Processed over <strong style="color:var(--green)">1.2 million spatial data points</strong> from tumor microenvironment samples. Applied clustering, dimensionality reduction, and spatial statistics to identify novel cancer biomarkers. Published in iScience.</div>
+          <div class="pc-tags"><span class="ptag g">1.2M+ pts</span><span class="ptag c">Python</span><span class="ptag c">R</span><span class="ptag b">Cell Press</span></div>
+        </div>
+        <div class="p-card">
+          <div class="pc-sub">OSU RESNA · 2025</div>
+          <div class="pc-title">Assistive Technology IMU Test Stand</div>
+          <div class="pc-text">Built a custom IMU orientation test stand using BNO055 sensor with Kalman filter fusion. Compared against encoder ground truth across a ±42° pitch swing. RESNA 2026 paper submitted.</div>
+          <div class="pc-tags"><span class="ptag c">Arduino</span><span class="ptag c">BNO055</span><span class="ptag c">Kalman</span><span class="ptag y">RESNA</span></div>
+        </div>
+        <div class="p-card">
+          <div class="pc-sub">HACKATHON · 2024</div>
+          <div class="pc-title">Medical Appathon — 1st Place</div>
+          <div class="pc-text">Won first place at a medical hackathon with an ML-powered clinical decision support tool. Built end-to-end in 24 hours including data pipeline, model, and front-end demo.</div>
+          <div class="pc-tags"><span class="ptag g">1st Place</span><span class="ptag c">Python</span><span class="ptag b">React</span></div>
+        </div>
+      </div>`
+  },
+
+  research: {
+    ref: 'U5 · SENSOR ARRAY MODULE',
+    title: 'Research & Publications',
+    render: () => `
+      <div class="p-grid">
+        <div class="p-card" style="border-color:var(--green);background:rgba(0,255,85,.03);">
+          <div class="pc-sub">PUBLISHED · 2024</div>
+          <div class="pc-title">iScience — Cell Press</div>
+          <div class="pc-text">Spatial transcriptomics study of tumor microenvironments in pediatric brain cancer. Processed 1.2M+ data points, identified novel spatial gene expression patterns. International conference presentation to clinicians.</div>
+          <div class="pc-tags"><span class="ptag g">Published</span><span class="ptag g">Cell Press</span><span class="ptag c">Spatial Stats</span><span class="ptag b">Cancer Biology</span></div>
+        </div>
+        <div class="p-card" style="border-color:var(--yellow);background:rgba(255,204,0,.02);">
+          <div class="pc-sub">ACCEPTED · AIAA SciTech 2025</div>
+          <div class="pc-title">On-Drone Wildfire Detection</div>
+          <div class="pc-text">Machine learning pipeline for real-time wildfire classification on UAV platforms. Custom IMU test stand for orientation estimation. Presented at AIAA SciTech Forum 2025.</div>
+          <div class="pc-tags"><span class="ptag y">Accepted</span><span class="ptag y">AIAA 2025</span><span class="ptag c">CNN</span><span class="ptag c">Edge AI</span></div>
+        </div>
+        <div class="p-card">
+          <div class="pc-sub">SUBMITTED · RESNA 2026</div>
+          <div class="pc-title">Assistive Technology Sensor Fusion</div>
+          <div class="pc-text">Kalman-filtered IMU orientation system for assistive technology applications. Validation against encoder ground truth demonstrating clinical viability. Submitted to RESNA 2026 annual conference.</div>
+          <div class="pc-tags"><span class="ptag b">Submitted</span><span class="ptag b">RESNA 2026</span><span class="ptag c">IMU</span><span class="ptag c">Rehabilitation</span></div>
+        </div>
+      </div>`
+  },
+
+  contact: {
+    ref: 'J1 · I/O CONNECTOR',
+    title: 'Get In Touch',
+    render: () => `
+      <p style="margin-bottom:18px;font-size:.76rem;">I'm actively looking for full-time roles in data science, ML engineering, or AI research. Currently incoming at <strong style="color:var(--green)">JPMorgan Chase</strong> for Summer 2026 — reach out anytime.</p>
+      <div class="p-grid">
+        <div class="p-card">
+          <div class="pc-title">Email</div>
+          <div class="pc-text" style="color:var(--green);">dhruvchavan59@gmail.com</div>
+          <a class="p-link" href="mailto:dhruvchavan59@gmail.com" style="margin-top:8px;display:inline-flex;">✉ Send Email</a>
+        </div>
+        <div class="p-card">
+          <div class="pc-title">GitHub</div>
+          <div class="pc-text">dchavan2192 — ML projects, research code, and experiments.</div>
+          <a class="p-link" href="https://github.com/dchavan2192" target="_blank" style="margin-top:8px;display:inline-flex;">⌥ View GitHub</a>
+        </div>
+        <div class="p-card">
+          <div class="pc-title">LinkedIn</div>
+          <div class="pc-text">Connect for opportunities, collaborations, or just to say hi.</div>
+          <a class="p-link" href="https://linkedin.com/in/dhruvchavan" target="_blank" style="margin-top:8px;display:inline-flex;">◈ Connect</a>
+        </div>
+        <div class="p-card">
+          <div class="pc-title">Resume</div>
+          <div class="pc-text">Full CV including all experiences, publications, and skills.</div>
+          <a class="p-link" href="resume.pdf" download style="margin-top:8px;display:inline-flex;">↓ Download PDF</a>
+        </div>
+      </div>`
+  }
+};
+
+/* ── BOOT SEQUENCE ───────────────────────────────────────── */
+(function boot() {
+  const term = document.getElementById('boot-term');
+  const bar  = document.getElementById('boot-bar');
+  const el   = document.getElementById('boot');
+
+  const lines = [
+    { t: 'PCB Portfolio v2.0 initializing...',    pct:  8 },
+    { t: 'Etching copper traces on FR4 substrate', pct: 22, ok: '✓ ok' },
+    { t: 'Soldering component U1 (DHRUV_CPU)',      pct: 38, ok: '✓ ok' },
+    { t: 'Programming FPGA bitstream',             pct: 52, ok: '✓ ok' },
+    { t: 'Flashing MCU firmware',                  pct: 65, ok: '✓ ok' },
+    { t: 'Checking internship_status.json',        pct: 78, ok: '✓ JPMC secured' },
+    { t: 'Running DRC (design rule check)',        pct: 90, ok: '✓ 0 errors' },
+    { t: 'Power-on self test complete',             pct:100 },
+  ];
+
+  let delay = 0;
+  lines.forEach((l, i) => {
+    delay += i === 0 ? 300 : 400;
+    setTimeout(() => {
+      const row = document.createElement('div');
+      row.className = 'bl';
+      row.style.animationDelay = '0s';
+      row.innerHTML = `<span style="color:var(--copper)">›</span> ${l.t}${l.ok ? `<span class="ok">${l.ok}</span>` : ''}`;
+      term.appendChild(row);
+      bar.style.width = l.pct + '%';
+      if (i === lines.length - 1) {
+        setTimeout(() => {
+          el.classList.add('fade');
+          initAll();
+        }, 600);
+      }
+    }, delay);
+  });
+})();
+
+/* ── INIT ────────────────────────────────────────────────── */
+function initAll() {
+  initBgCanvas();
+  initCursor();
+  initPan();
+  initChips();
+  initPanel();
+  initNav();
+  initElectrons();
+  initHudTemp();
+  centerBoard();
+}
+
+/* ── PCB BACKGROUND CANVAS ───────────────────────────────── */
+function initBgCanvas() {
+  const canvas = document.getElementById('bg-canvas');
+  const W = 1920, H = 1100;
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  // Board fill
+  ctx.fillStyle = '#09180a';
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid dots (vias/pads pattern)
+  ctx.fillStyle = 'rgba(100,180,100,0.06)';
+  const gs = 40;
+  for (let x = gs; x < W; x += gs) {
+    for (let y = gs; y < H; y += gs) {
+      ctx.beginPath();
+      ctx.arc(x, y, 1.2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Subtle grain
+  for (let i = 0; i < 8000; i++) {
+    const x = Math.random() * W;
+    const y = Math.random() * H;
+    const a = Math.random() * 0.04 + 0.01;
+    ctx.fillStyle = `rgba(140,200,140,${a})`;
+    ctx.fillRect(x, y, 1, 1);
+  }
+
+  // Ground plane patches (darker rectangles in corners)
+  ctx.fillStyle = 'rgba(0,0,0,0.15)';
+  ctx.fillRect(10, 10, 300, 70);
+  ctx.fillRect(W - 310, 10, 300, 70);
+  ctx.fillRect(10, H - 80, 300, 70);
+  ctx.fillRect(W - 310, H - 80, 300, 70);
+
+  // Silkscreen border lines (inner)
+  ctx.strokeStyle = 'rgba(228,252,228,0.08)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(30, 30, W - 60, H - 60);
+}
+
+/* ── CUSTOM CURSOR ───────────────────────────────────────── */
+function initCursor() {
+  const dot  = document.getElementById('cur-dot');
+  const ring = document.getElementById('cur-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+  });
+
+  (function animRing() {
+    rx += (mx - rx) * 0.14;
+    ry += (my - ry) * 0.14;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
+
+  document.querySelectorAll('.chip, .connector, .mnb, .p-close, .p-link').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+  });
+}
+
+/* ── BOARD PAN ───────────────────────────────────────────── */
+let boardX = 0, boardY = 0;
+let dragStartX, dragStartY, dragBoardX, dragBoardY, dragging = false;
+const BOARD = document.getElementById('board');
+const VP    = document.getElementById('viewport');
+
+function setBoard(x, y) {
+  boardX = x; boardY = y;
+  BOARD.style.transform = `translate(${x}px,${y}px)`;
+}
+
+function centerBoard() {
+  const vw = VP.clientWidth, vh = VP.clientHeight;
+  setBoard((vw - 1920) / 2, (vh - 1100) / 2);
+}
+
+function initPan() {
+  VP.addEventListener('mousedown', e => {
+    if (e.target.closest('.chip, .connector, #panel')) return;
+    dragging = true;
+    dragStartX = e.clientX; dragStartY = e.clientY;
+    dragBoardX = boardX;    dragBoardY = boardY;
+    VP.style.cursor = 'grabbing';
+  });
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    let nx = dragBoardX + (e.clientX - dragStartX);
+    let ny = dragBoardY + (e.clientY - dragStartY);
+    // soft clamp
+    const vw = VP.clientWidth, vh = VP.clientHeight;
+    nx = Math.min(100, Math.max(vw - 1820, nx));
+    ny = Math.min(100, Math.max(vh - 1000, ny));
+    setBoard(nx, ny);
+  });
+  window.addEventListener('mouseup', () => {
+    dragging = false;
+    VP.style.cursor = '';
+  });
+
+  // Wheel zoom (subtle)
+  VP.addEventListener('wheel', e => {
+    e.preventDefault();
+    const scale = BOARD._scale || 1;
+    const ns = Math.min(1.3, Math.max(0.6, scale - e.deltaY * 0.0008));
+    BOARD._scale = ns;
+    BOARD.style.transformOrigin = '50% 50%';
+    BOARD.style.transform = `translate(${boardX}px,${boardY}px) scale(${ns})`;
+  }, { passive: false });
+}
+
+/* ── CHIPS & PANEL ───────────────────────────────────────── */
+const panel  = document.getElementById('panel');
+const pRef   = document.getElementById('p-ref');
+const pTitle = document.getElementById('p-title');
+const pBody  = document.getElementById('p-body');
+let   openSection = null;
+
+function initChips() {
+  document.querySelectorAll('.chip, .connector').forEach(chip => {
+    chip.addEventListener('click', e => {
+      const sec = chip.dataset.section;
+      if (!sec || !PANELS[sec]) return;
+      ripple(chip, e);
+      openPanel(sec);
+    });
+  });
+}
+
+function openPanel(sec) {
+  openSection = sec;
+  const data = PANELS[sec];
+  pRef.textContent   = data.ref;
+  pTitle.textContent = data.title;
+  pBody.innerHTML    = data.render();
+  panel.classList.add('open');
+
+  // animate skill bars after render
+  requestAnimationFrame(() => {
+    panel.querySelectorAll('.sk-fill').forEach(el => {
+      const w = el.dataset.w || el.style.width;
+      el.style.width = '0%';
+      requestAnimationFrame(() => { el.style.width = w; });
+    });
+  });
+}
+
+function initPanel() {
+  document.getElementById('p-close').addEventListener('click', closePanel);
+  panel.addEventListener('click', e => { if (e.target === panel) closePanel(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+}
+
+function closePanel() {
+  panel.classList.remove('open');
+  openSection = null;
+}
+
+/* ── MINI NAV ────────────────────────────────────────────── */
+function initNav() {
+  document.querySelectorAll('.mnb').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sec = btn.dataset.target;
+      openPanel(sec);
+      // also scroll board so chip is visible
+      const chip = document.querySelector(`[data-section="${sec}"]`);
+      if (chip) focusChip(chip);
+    });
+  });
+}
+
+function focusChip(chip) {
+  const vw = VP.clientWidth, vh = VP.clientHeight;
+  const cx = parseInt(chip.style.left) + parseInt(chip.style.width || chip.offsetWidth) / 2;
+  const cy = parseInt(chip.style.top)  + parseInt(chip.style.height || chip.offsetHeight) / 2;
+  const tx = vw / 2 - cx;
+  const ty = vh / 2 - cy;
+  const nx = Math.min(100, Math.max(vw - 1820, tx));
+  const ny = Math.min(100, Math.max(vh - 1000, ty));
+  BOARD.style.transition = 'transform .6s cubic-bezier(.4,0,.2,1)';
+  setBoard(nx, ny);
+  setTimeout(() => { BOARD.style.transition = ''; }, 700);
+}
+
+/* ── RIPPLE ──────────────────────────────────────────────── */
+function ripple(el, e) {
+  const rect = el.getBoundingClientRect();
+  const r = document.createElement('div');
+  r.className = 'ripple';
+  r.style.cssText = `position:absolute;left:${e.clientX-rect.left}px;top:${e.clientY-rect.top}px;border:2px solid var(--green);border-radius:50%;width:0;height:0;animation:ripOut .6s ease forwards;pointer-events:none;`;
+  el.appendChild(r);
+  r.addEventListener('animationend', () => r.remove());
+}
+const ripStyle = document.createElement('style');
+ripStyle.textContent = `@keyframes ripOut{from{width:0;height:0;opacity:1;transform:translate(-50%,-50%)}to{width:90px;height:90px;opacity:0;transform:translate(-50%,-50%)}}`;
+document.head.appendChild(ripStyle);
+
+/* ── ELECTRON ANIMATIONS ─────────────────────────────────── */
+function initElectrons() {
+  const traces = [
+    { path: 'el-a', dur: 2400, color: 'rgba(0,255,85,0.7)',  dashes: '30 570', delay: 0 },
+    { path: 'el-b', dur: 2100, color: 'rgba(200,128,58,0.7)', dashes: '30 450', delay: 400 },
+    { path: 'el-c', dur: 2700, color: 'rgba(0,255,85,0.6)',  dashes: '30 550', delay: 800 },
+    { path: 'el-d', dur: 2500, color: 'rgba(68,170,255,0.6)', dashes: '30 530', delay: 200 },
+    { path: 'el-e', dur: 1900, color: 'rgba(200,128,58,0.7)', dashes: '30 390', delay: 600 },
+    { path: 'el-f', dur: 1500, color: 'rgba(68,170,255,0.6)', dashes: '25 210', delay: 1000 },
+  ];
+
+  traces.forEach(({ path, dur, color, dashes, delay }) => {
+    const el = document.getElementById(path);
+    if (!el) return;
+    el.style.stroke = color;
+    el.style.strokeDasharray = dashes;
+    el.style.strokeWidth = '8';
+
+    function animate() {
+      const [dashLen, gapLen] = dashes.split(' ').map(Number);
+      const total = dashLen + gapLen;
+      let start = null;
+      el.style.opacity = '1';
+
+      function step(ts) {
+        if (!start) start = ts;
+        const progress = ((ts - start) % dur) / dur;
+        el.style.strokeDashoffset = -(progress * total * Math.ceil((dashLen + gapLen * 3) / total + 1));
+        requestAnimationFrame(step);
+      }
+      setTimeout(() => requestAnimationFrame(step), delay);
+    }
+    animate();
+  });
+}
+
+/* ── HUD TEMP (fake sensor) ──────────────────────────────── */
+function initHudTemp() {
+  const el = document.getElementById('hud-temp');
+  setInterval(() => {
+    const t = (40 + Math.random() * 6).toFixed(1);
+    el.textContent = t + '°C';
+  }, 3000);
+}
+
+/* ── INITIAL CENTERING ON RESIZE ─────────────────────────── */
+window.addEventListener('resize', centerBoard);
+</script>
+</body>
+</html>

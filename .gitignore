@@ -2,3 +2,7 @@
 assets/autonmousBugatti/IMG_*.MOV
 assets/imuTeststand/IMG_*.MOV
 assets/imuTeststand/*.png
+
+.claude/settings.local.json
+
+.local-backups/
