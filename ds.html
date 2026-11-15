@@ -191,20 +191,21 @@
           <span class="date">Rust · WASM · 2026</span>
         </div>
         <p class="note">
-          An artificial-life research platform (targeting ALIFE 2027) where creatures with evolvable NEAT
-          neural-network brains forage, hunt, share energy, and speciate in a deterministic, seeded world.
-          Mechanisms include sexual reproduction with a real twofold cost of sex, niche construction
-          (ecological inheritance), stress-responsive epigenetic inheritance, activity-dependent brain metabolism,
-          droughts, seasons, terrain, and kin selection, each grounded in the biology literature.
-          Open-ended-evolution metrics (Bedau &amp; Packard evolutionary activity) with a neutral-model baseline in progress.
-          The live demo is an explainable 3D view: the Rust engine compiled to WebAssembly drives a Three.js
-          scene with a plain-English event feed, live ecosystem metrics, and a per-creature brain inspector.
-          Zero-allocation hot loops, rayon parallelism, and a full test suite. Every push is tested and
-          redeployed automatically, so the demo always runs the current code.
+          An artificial-life research platform where creatures with evolving neural-network brains forage,
+          hunt, share energy, and reproduce in a seeded ecosystem. A Rust simulation engine powers both
+          headless experiments and an explainable Three.js browser demo through WebAssembly.
+          The demo includes a live story feed, creature and brain inspectors, and a measured energy budget
+          showing food inputs, metabolic costs, transfer losses, and reserve changes.
+          Research tools include validated parameter sweeps, versioned run records, genome exports, and
+          exact checkpoint/resume within a compatible build. Controlled tests cover environmental and
+          inheritance mechanisms. Open-ended evolution and cognitive gains remain research questions;
+          earlier results affected by energy-accounting bugs are explicitly withdrawn.
+          Passing builds redeploy the linked demo automatically; its header identifies the deployed commit.
         </p>
-        <p class="stack">Rust · NEAT · WebAssembly · Three.js · rayon · Python · Epigenetics · Niche Construction · Open-Ended Evolution</p>
+        <p class="stack">Rust · Neuroevolution · WebAssembly · Three.js · rayon · Python · Reproducible Experiments</p>
         <a class="more" href="https://dchavan2192.github.io/Digital-Terrarium/" target="_blank" rel="noopener">Live 3D demo &rarr;</a>
         <a class="more" href="https://github.com/dchavan2192/Digital-Terrarium" target="_blank" rel="noopener" style="margin-left:1rem;">GitHub &rarr;</a>
+        <a class="more" href="https://github.com/dchavan2192/Digital-Terrarium/blob/main/docs/PROGRESS.md" target="_blank" rel="noopener" style="margin-left:1rem;">Research progress &rarr;</a>
       </article>
 
       <article class="entry">
